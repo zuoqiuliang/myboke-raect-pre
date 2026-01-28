@@ -1,0 +1,48 @@
+.add_article_container {
+	min-height: calc(100vh - 80px);
+	margin: 0;
+	padding: 40px 20px;
+	box-sizing: border-box;
+	overflow-y: auto;
+	background: #f5f7fa;
+}
+
+.add_article_main {
+	background-color: #ffffff;
+	border-radius: 12px;
+	padding: 48px;
+	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+	max-width: 1000px;
+	margin: 0 auto;
+	.ant_form {
+		max-width: 900px;
+		margin: 0 auto;
+
+		:global {
+			.ant-form-item {
+				margin-bottom: 28px;
+			}
+
+			.ant-form-item-label {
+				text-align: right;
+				width: 120px;
+				padding-right: 24px;
+			}
+
+			.ant-form-item:last-child {
+				display: flex;
+				margin-top: 40px;
+				margin-left: 150px;
+			}
+
+			.ant-form-item:last-child .ant-form-item-label {
+				display: none;
+			}
+
+			.ant-form-item:last-child .ant-form-item-control {
+				display: flex;
+				justify-content: center;
+			}
+		}
+	}
+}

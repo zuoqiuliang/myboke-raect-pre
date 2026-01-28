@@ -1,0 +1,167 @@
+.article_link {
+	text-decoration: none;
+	color: inherit;
+	
+	&:hover .article_item {
+		transform: translateY(-2px);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+	}
+}
+
+.article_item {
+	display: flex;
+	align-items: flex-start;
+	padding: 20px 24px;
+	box-sizing: border-box;
+	cursor: pointer;
+	width: 100%;
+	border-bottom: 1px solid #f1f5f9;
+	transition: all 0.3s ease;
+	background: #ffffff;
+	
+	&:last-child {
+		border-bottom: none;
+	}
+	
+	&:hover {
+		background-color: #f8fafc;
+	}
+	
+	// 左侧内容区域
+	.left_con {
+		flex: 1;
+		min-width: 0;
+		margin-right: 24px;
+		
+		.article_title {
+			font-weight: 600;
+			font-size: 18px;
+			line-height: 1.4;
+			color: #1e293b;
+			margin-bottom: 12px;
+			display: -webkit-box;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 2;
+			transition: color 0.3s ease;
+			
+			&:hover {
+				color: #1890ff;
+			}
+		}
+		
+		.article_content {
+			color: #64748b;
+			font-size: 14px;
+			line-height: 1.5;
+			width: 100%;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 2;
+			margin-bottom: 16px;
+		}
+		
+		.bottom_con {
+			font-size: 13px;
+			line-height: 1.4;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			
+			.left_info {
+				display: flex;
+				align-items: center;
+				gap: 16px;
+				
+				.username {
+					color: #475569;
+					font-weight: 500;
+					font-size: 13px;
+				}
+				
+				.category {
+					color: #94a3b8;
+					font-size: 12px;
+					background: #f1f5f9;
+					padding: 2px 8px;
+					border-radius: 12px;
+				}
+			}
+			
+			.right_info {
+				display: flex;
+				align-items: center;
+				gap: 16px;
+				
+				.scanNumber {
+					display: flex;
+					align-items: center;
+					gap: 6px;
+					color: #94a3b8;
+					font-size: 13px;
+					
+					.scanNumberIcon {
+						width: 16px;
+						height: 16px;
+						color: #94a3b8;
+					}
+				}
+				
+				.publish_time {
+					color: #94a3b8;
+					font-size: 13px;
+				}
+			}
+		}
+	}
+	
+	// 右侧缩略图区域
+	.right_con {
+		width: 140px;
+		flex-shrink: 0;
+		
+		.article_thumb {
+			width: 140px;
+			height: 94px;
+			border-radius: 8px;
+			overflow: hidden;
+			box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+			transition: transform 0.3s ease;
+			
+			&:hover {
+				transform: scale(1.02);
+			}
+			
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				transition: all 0.3s ease;
+			}
+		}
+	}
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+	.article_item {
+		flex-direction: column;
+		
+		.left_con {
+			margin-right: 0;
+			margin-bottom: 16px;
+		}
+		
+		.right_con {
+			width: 100%;
+			
+			.article_thumb {
+				width: 100%;
+				height: 180px;
+			}
+		}
+	}
+}

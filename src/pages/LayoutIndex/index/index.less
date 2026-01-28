@@ -1,0 +1,169 @@
+.index_container {
+	width: 1200px;
+	margin: 0 auto;
+	margin-top: 24px;
+	margin-bottom: 40px;
+	display: flex;
+	gap: 24px;
+
+	// 左侧分类导航
+	.types_con {
+		width: 180px;
+		background: #ffffff;
+		border-radius: 12px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+		padding: 16px;
+		box-sizing: border-box;
+		position: sticky;
+		top: 24px;
+		align-self: flex-start;
+
+		.types_item {
+			display: flex;
+			align-items: center;
+			font-size: 16px;
+			font-weight: 500;
+			cursor: pointer;
+			padding: 12px 16px;
+			margin-bottom: 8px;
+			border-radius: 8px;
+			transition: all 0.3s ease;
+			color: #4a5568;
+
+			&:hover {
+				background-color: #f7fafc;
+				color: #1890ff;
+			}
+
+			.types_item_name {
+				margin-left: 12px;
+				font-size: 14px;
+			}
+		}
+
+		.active {
+			color: #1890ff;
+			background-color: #e6f7ff;
+			font-weight: 600;
+		}
+	}
+
+	// 中间文章列表
+	.articles_con {
+		flex: 1;
+		min-width: 0;
+
+		// 文章列表容器
+		.article_list {
+			background: #ffffff;
+			border-radius: 12px;
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+			overflow: hidden;
+		}
+	}
+
+	// 右侧推荐区域
+	.recommend_con {
+		width: 280px;
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		position: sticky;
+		top: 24px;
+		align-self: flex-start;
+
+		// 欢迎卡片
+		.welcome_card {
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			color: #ffffff;
+			border-radius: 16px;
+			padding: 32px;
+			text-align: center;
+			box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+			transition:
+				transform 0.3s ease,
+				box-shadow 0.3s ease;
+
+			&:hover {
+				transform: translateY(-4px);
+				box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+			}
+		}
+
+		.welcome_title {
+			font-size: 24px;
+			font-weight: 700;
+			margin-bottom: 12px;
+			text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		}
+
+		.welcome_subtitle {
+			font-size: 14px;
+			margin-bottom: 24px;
+			opacity: 0.9;
+			line-height: 1.4;
+		}
+
+		.welcome_date {
+			font-size: 16px;
+			font-weight: 600;
+			margin-bottom: 8px;
+			opacity: 0.95;
+		}
+
+		.welcome_time {
+			font-size: 18px;
+			font-weight: 600;
+			opacity: 0.95;
+		}
+
+		// 其他推荐内容（可扩展）
+		.other_recommend {
+			background: #ffffff;
+			border-radius: 12px;
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+			padding: 20px;
+
+			.recommend_title {
+				font-size: 16px;
+				font-weight: 600;
+				margin-bottom: 16px;
+				color: #2d3748;
+			}
+		}
+	}
+
+	// 响应式设计
+	@media (max-width: 1280px) {
+		width: 95%;
+		max-width: 1000px;
+
+		.types_con {
+			width: 160px;
+		}
+
+		.recommend_con {
+			width: 240px;
+		}
+	}
+
+	@media (max-width: 968px) {
+		flex-direction: column;
+
+		.types_con {
+			width: 100%;
+			position: static;
+			order: 1;
+		}
+
+		.articles_con {
+			order: 2;
+		}
+
+		.recommend_con {
+			width: 100%;
+			position: static;
+			order: 3;
+		}
+	}
+}

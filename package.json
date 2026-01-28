@@ -1,0 +1,25 @@
+{
+  "private": true,
+  "author": "zuoqiuliang <zuoqiuliang@huatu.com>",
+  "scripts": {
+    "dev": "umi dev",
+    "build": "umi build",
+    "postinstall": "umi setup",
+    "setup": "umi setup",
+    "start": "npm run dev"
+  },
+  "dependencies": {
+    "@ant-design/icons": "~6.1.0",
+    "@toast-ui/editor": "^3.2.2",
+    "@toast-ui/react-editor": "^3.2.3",
+    "classnames": "^2.5.1",
+    "dayjs": "^1.11.19",
+    "umi": "^4.6.8"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.33",
+    "@types/react-dom": "^18.0.11",
+    "@umijs/plugins": "^4.6.13",
+    "typescript": "^5.0.3"
+  }
+}
