@@ -1,7 +1,7 @@
 import React from "react";
 import registerStyle from "./index.less";
 import type { FormProps } from "antd";
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, Checkbox, Form, Input, message } from "antd";
 import { resgister } from "@/api/login";
 export default function RegisterForm() {
 	type FieldType = {
@@ -15,6 +15,11 @@ export default function RegisterForm() {
 		resgister(values)
 			.then((res) => {
 				console.log(res);
+				if (res) {
+					message.success("注册成功!");
+				} else {
+					message.error(res.msg || "注册失败!");
+				}
 			})
 			.catch((err) => {
 				console.log(err);

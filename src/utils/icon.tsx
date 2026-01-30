@@ -82,6 +82,6 @@ const frontendType = (props: any) => {
 // 博客类型对应 icon
 export const blogTypeIconMap: any = {
 	"-1": allType,
-	"3537f8d5-b5ad-4112-9dea-8ecbca1fec62": backendType,
-	"6465716c-3e82-4a47-a52c-699ca481dc0b": frontendType
+	frontend: backendType,
+	backend: frontendType
 };

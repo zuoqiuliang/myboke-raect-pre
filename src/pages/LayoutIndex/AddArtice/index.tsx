@@ -21,7 +21,7 @@ export default function index() {
 			console.log(res);
 			if (res) {
 				setBlogTypeList(
-					res.map((item: any) => {
+					res.rows.map((item: any) => {
 						return {
 							value: item.id,
 							label: item.name

@@ -1,43 +1,69 @@
 .article_link {
 	text-decoration: none;
 	color: inherit;
-	
+
 	&:hover .article_item {
-		transform: translateY(-2px);
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+		transform: translateY(-2px) translateZ(3px);
+		box-shadow:
+			0 8px 24px rgba(24, 144, 255, 0.15),
+			inset 0 1px 0 rgba(255, 255, 255, 0.95);
 	}
 }
 
 .article_item {
 	display: flex;
 	align-items: flex-start;
-	padding: 20px 24px;
+	padding: 24px 28px;
 	box-sizing: border-box;
 	cursor: pointer;
 	width: 100%;
-	border-bottom: 1px solid #f1f5f9;
-	transition: all 0.3s ease;
-	background: #ffffff;
-	
-	&:last-child {
-		border-bottom: none;
-	}
-	
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	background: rgba(255, 255, 255, 0.7);
+	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px);
+	border: 1px solid rgba(24, 144, 255, 0.15);
+	border-radius: 20px;
+	box-shadow:
+		// 顶部高光
+		inset 0 2px 0 rgba(255, 255, 255, 0.98),
+		// 底部内阴影
+		inset 0 -1px 0 rgba(24, 144, 255, 0.1),
+		// 左侧内阴影
+		inset 1px 0 0 rgba(255, 255, 255, 0.9),
+		// 右侧内阴影
+		inset -1px 0 0 rgba(24, 144, 255, 0.08),
+		// 外部阴影
+		0 4px 16px rgba(24, 144, 255, 0.1);
+	transform-style: preserve-3d;
+
 	&:hover {
-		background-color: #f8fafc;
+		background: rgba(24, 144, 255, 0.12);
+		border: 1px solid rgba(24, 144, 255, 0.25);
+		transform: translateY(-5px) scale(1.02);
+		box-shadow:
+			// 顶部高光
+			inset 0 2px 0 rgba(255, 255, 255, 1),
+			// 底部内阴影
+			inset 0 -2px 0 rgba(24, 144, 255, 0.15),
+			// 左侧内阴影
+			inset 2px 0 0 rgba(255, 255, 255, 1),
+			// 右侧内阴影
+			inset -2px 0 0 rgba(24, 144, 255, 0.1),
+			// 外部阴影
+			0 8px 24px rgba(24, 144, 255, 0.15);
 	}
-	
+
 	// 左侧内容区域
 	.left_con {
 		flex: 1;
 		min-width: 0;
 		margin-right: 24px;
-		
+
 		.article_title {
 			font-weight: 600;
 			font-size: 18px;
 			line-height: 1.4;
-			color: #1e293b;
+			color: #1890ff;
 			margin-bottom: 12px;
 			display: -webkit-box;
 			overflow: hidden;
@@ -45,14 +71,18 @@
 			-webkit-box-orient: vertical;
 			-webkit-line-clamp: 2;
 			transition: color 0.3s ease;
-			
+			letter-spacing: 0.2px;
+			font-smooth: antialiased;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+
 			&:hover {
-				color: #1890ff;
+				color: #096dd9;
 			}
 		}
-		
+
 		.article_content {
-			color: #64748b;
+			color: #4a4a4a;
 			font-size: 14px;
 			line-height: 1.5;
 			width: 100%;
@@ -62,67 +92,84 @@
 			-webkit-box-orient: vertical;
 			-webkit-line-clamp: 2;
 			margin-bottom: 16px;
+			transition: color 0.3s ease;
+
+			&:hover {
+				color: #1890ff;
+			}
 		}
-		
+
 		.bottom_con {
 			font-size: 13px;
 			line-height: 1.4;
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			
+
 			.left_info {
 				display: flex;
 				align-items: center;
 				gap: 16px;
-				
+
 				.username {
-					color: #475569;
+					color: #666666;
 					font-weight: 500;
 					font-size: 13px;
+					transition: color 0.3s ease;
+
+					&:hover {
+						color: #1890ff;
+					}
 				}
-				
+
 				.category {
-					color: #94a3b8;
+					color: #1890ff;
 					font-size: 12px;
-					background: #f1f5f9;
+					background: rgba(24, 144, 255, 0.1);
 					padding: 2px 8px;
 					border-radius: 12px;
+					border: 1px solid rgba(24, 144, 255, 0.2);
+					transition: all 0.3s ease;
+
+					&:hover {
+						background: rgba(24, 144, 255, 0.2);
+						border-color: rgba(24, 144, 255, 0.3);
+					}
 				}
 			}
-			
+
 			.right_info {
 				display: flex;
 				align-items: center;
 				gap: 16px;
-				
+
 				.scanNumber {
 					display: flex;
 					align-items: center;
 					gap: 6px;
-					color: #94a3b8;
+					color: #999999;
 					font-size: 13px;
-					
+
 					.scanNumberIcon {
 						width: 16px;
 						height: 16px;
-						color: #94a3b8;
+						color: #999999;
 					}
 				}
-				
+
 				.publish_time {
-					color: #94a3b8;
+					color: #999999;
 					font-size: 13px;
 				}
 			}
 		}
 	}
-	
+
 	// 右侧缩略图区域
 	.right_con {
 		width: 140px;
 		flex-shrink: 0;
-		
+
 		.article_thumb {
 			width: 140px;
 			height: 94px;
@@ -130,11 +177,11 @@
 			overflow: hidden;
 			box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 			transition: transform 0.3s ease;
-			
+
 			&:hover {
 				transform: scale(1.02);
 			}
-			
+
 			img {
 				width: 100%;
 				height: 100%;
@@ -149,15 +196,15 @@
 @media (max-width: 768px) {
 	.article_item {
 		flex-direction: column;
-		
+
 		.left_con {
 			margin-right: 0;
 			margin-bottom: 16px;
 		}
-		
+
 		.right_con {
 			width: 100%;
-			
+
 			.article_thumb {
 				width: 100%;
 				height: 180px;

@@ -23,7 +23,7 @@ export default function ArticleType({
 						[indexStyle.types_item]: true
 					})}
 					onClick={() => setCurrentType(item.id + "")}>
-					<Icon component={blogTypeIconMap[item.id]} />
+					<Icon component={blogTypeIconMap[item.path]} />
 					<span className={indexStyle.types_item_name}>{item.name}</span>
 				</div>
 			);
@@ -32,9 +32,9 @@ export default function ArticleType({
 	useEffect(() => {
 		getArticleType().then((res) => {
 			console.log(res);
-			if (res.length > 0) {
-				setTypes(res);
-				setCurrentType(res[0].id + "");
+			if (res.rows.length > 0) {
+				setTypes(res.rows);
+				setCurrentType(res.rows[0].id + "");
 			}
 		});
 		// .catch((err) => {
