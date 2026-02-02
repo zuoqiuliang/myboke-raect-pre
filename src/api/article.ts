@@ -28,3 +28,10 @@ export const getArticleDetail = (id: string) => {
 		method: "GET"
 	});
 };
+
+// 获取标签列表
+export const getSignList = () => {
+	return request("/api/tag", {
+		method: "GET"
+	});
+};

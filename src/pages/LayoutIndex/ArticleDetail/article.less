@@ -5,6 +5,73 @@
 	background-color: #ffffff;
 	position: relative;
 
+	// 滚动到顶部按钮
+	.scroll_to_top {
+		position: fixed;
+		right: 20px;
+		bottom: 40px;
+		width: 64px;
+		height: 64px;
+		background: rgba(24, 144, 255, 0.9);
+		backdrop-filter: blur(24px);
+		-webkit-backdrop-filter: blur(24px);
+		border: 1px solid rgba(24, 144, 255, 0.4);
+		border-radius: 50%;
+		box-shadow:
+			0 8px 32px rgba(24, 144, 255, 0.3),
+			inset 0 2px 0 rgba(255, 255, 255, 0.3),
+			inset 0 -2px 0 rgba(24, 144, 255, 0.2);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		transition: all 0.3s ease-out;
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(20px) scale(0.8);
+		z-index: 1000;
+
+		&.scroll_to_top_visible {
+			opacity: 1;
+			visibility: visible;
+			transform: translateY(0) scale(1);
+			animation: scrollToTopFadeIn 1s ease-out 0s forwards;
+		}
+
+		&:hover {
+			background: rgba(24, 144, 255, 1);
+			transform: translateY(-4px) scale(1.1) rotate(5deg);
+			box-shadow:
+				0 12px 40px rgba(24, 144, 255, 0.4),
+				inset 0 2px 0 rgba(255, 255, 255, 0.4),
+				inset 0 -2px 0 rgba(24, 144, 255, 0.3);
+			border: 1px solid rgba(24, 144, 255, 0.6);
+		}
+
+		&:active {
+			transform: translateY(10px) scale(0.95) rotate(-2deg);
+			box-shadow:
+				0 4px 16px rgba(24, 144, 255, 0.2),
+				inset 0 2px 0 rgba(255, 255, 255, 0.3),
+				inset 0 -2px 0 rgba(24, 144, 255, 0.2);
+		}
+
+		.icon {
+			font-size: 28px;
+			color: #ffffff;
+			transition: all 0.3s ease;
+			transform: rotate(0deg);
+		}
+
+		&:hover .icon {
+			transform: rotate(-10deg) scale(1.1);
+		}
+
+		&:active .icon {
+			transform: rotate(15deg) scale(0.9);
+		}
+	}
+
 	.operate {
 		position: fixed;
 		left: 24px;
@@ -65,6 +132,50 @@
 				font-size: 24px;
 				margin-bottom: 4px;
 			}
+		}
+	}
+
+	// 滚动到顶部按钮动画
+	@keyframes scrollToTopFadeIn {
+		0% {
+			opacity: 0;
+			visibility: hidden;
+			transform: translateY(0) scale(0.8);
+		}
+		20% {
+			opacity: 0.3;
+			visibility: visible;
+			transform: translateY(0) scale(0.85);
+		}
+		40% {
+			opacity: 0.5;
+			transform: translateY(0) scale(0.9);
+		}
+		60% {
+			opacity: 0.7;
+			transform: translateY(0) scale(0.95);
+		}
+		80% {
+			opacity: 0.9;
+			transform: translateY(0) scale(0.98);
+		}
+		100% {
+			opacity: 1;
+			visibility: visible;
+			transform: translateY(0) scale(1);
+		}
+	}
+
+	// 滚动到顶部内容动画
+	@keyframes scrollToTopContent {
+		0% {
+			transform: translateY(0);
+		}
+		50% {
+			transform: translateY(-20px);
+		}
+		100% {
+			transform: translateY(0);
 		}
 	}
 
@@ -158,6 +269,9 @@
 			color: #4e5969;
 			font-size: 16px;
 			line-height: 28px;
+			word-break: break-word;
+			white-space: normal;
+			overflow-wrap: break-word;
 
 			h1,
 			h2,
@@ -168,6 +282,7 @@
 				color: #1d2129;
 				margin: 24px 0 16px 0;
 				font-weight: 600;
+				word-break: break-word;
 			}
 
 			h1 {
@@ -186,6 +301,7 @@
 
 			p {
 				margin: 16px 0;
+				word-break: break-word;
 			}
 
 			img {
@@ -200,6 +316,7 @@
 				border-radius: 4px;
 				font-family: "Courier New", Courier, monospace;
 				font-size: 14px;
+				word-break: break-all;
 			}
 
 			pre {
@@ -220,6 +337,7 @@
 				padding-left: 16px;
 				color: #8a919f;
 				margin: 16px 0;
+				word-break: break-word;
 			}
 
 			ul,
@@ -230,6 +348,7 @@
 
 			li {
 				margin: 8px 0;
+				word-break: break-word;
 			}
 		}
 

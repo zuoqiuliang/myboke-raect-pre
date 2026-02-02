@@ -1,12 +1,13 @@
 import addArticleStyle from "./index.less";
 import type { FormProps, GetProp, UploadFile, UploadProps, FileType } from "antd";
-import { Button, Form, Input, Upload, Select, message } from "antd";
+import { Button, Form, Input, Upload, Select, message, TreeSelect } from "antd";
 import { Editor, EditorProps } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { useState, useEffect, useRef } from "react";
 import UploadImage from "./components/UploadImage";
-import { getBlogTypeList, addArticle } from "@/api/article";
+import { getBlogTypeList, addArticle, getSignList } from "@/api/article";
 import { uploadImage } from "@/api/upload";
+import { useNavigate } from "umi";
 
 export default function index() {
 	type FieldType = {
@@ -16,6 +17,10 @@ export default function index() {
 	const [form] = Form.useForm();
 	const [blogTypeList, setBlogTypeList] = useState<any>([]);
 	const [fileList, setFileList] = useState<UploadFile[]>([]);
+	const [tagList, setTagList] = useState<any>([]);
+	const [tags, setTags] = useState<any>([]);
+	const navigate = useNavigate();
+
 	useEffect(() => {
 		getBlogTypeList().then((res: any) => {
 			console.log(res);
@@ -47,6 +52,27 @@ export default function index() {
 			}
 		};
 	}, []);
+	useEffect(() => {
+		getSignList().then((res: any) => {
+			console.log(res);
+			if (res) {
+				setTagList(
+					res.map((item: any) => {
+						return {
+							value: item.id,
+							title: item.name,
+							children: item.children?.map((child: any) => {
+								return {
+									value: child.id,
+									title: child.name
+								};
+							})
+						};
+					})
+				);
+			}
+		});
+	}, []);
 	const changeFormItem = (values: any) => {
 		// console.log(values);
 	};
@@ -66,6 +92,7 @@ export default function index() {
 		}).then((res: any) => {
 			console.log(res);
 			if (res) {
+				navigate(`/`);
 				message.success("创建文章成功");
 			}
 		});
@@ -74,7 +101,10 @@ export default function index() {
 	const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo: any) => {
 		console.log("Failed:", errorInfo);
 	};
-
+	const tagTreeOnChange = (values: any) => {
+		console.log(values);
+		// setTags(values);
+	};
 	return (
 		<div className={addArticleStyle.add_article_container}>
 			<div className={addArticleStyle.add_article_main}>
@@ -135,6 +165,27 @@ export default function index() {
 						<Select allowClear options={blogTypeList} placeholder="请选择文章类型" />
 					</Form.Item>
 
+					<Form.Item
+						name="tags"
+						label="添加标签"
+						rules={[{ required: true, message: "请选择标签!" }]}>
+						<TreeSelect
+							showSearch
+							style={{ width: "100%" }}
+							value={tags}
+							styles={{
+								popup: {
+									root: { maxHeight: 400, overflow: "auto" }
+								}
+							}}
+							placeholder="请选择标签"
+							allowClear
+							multiple
+							treeDefaultExpandAll
+							onChange={tagTreeOnChange}
+							treeData={tagList}
+						/>
+					</Form.Item>
 					<Form.Item className="add_article_submit">
 						<Button type="primary" htmlType="submit">
 							提交

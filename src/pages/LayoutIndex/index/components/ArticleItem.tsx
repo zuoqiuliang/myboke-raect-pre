@@ -35,7 +35,15 @@ export default function ArticleItem({ article }: { article: any }) {
 	// 获取分类名称
 	const getCategoryName = () => {
 		// 这里假设文章对象中有分类信息，如果没有可以根据实际情况调整
-		return article.category?.name || "未分类";
+		return (
+			article.tags
+				?.map((item: any) => (
+					<span className={articleStyle.tag} key={item.id}>
+						{item.name}
+					</span>
+				))
+				.slice(0, 3) || "未添加标签"
+		);
 	};
 
 	// 截取文章内容，去除markdown格式
