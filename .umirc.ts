@@ -10,7 +10,8 @@ export default defineConfig({
 			routes: [
 				{ path: "/", component: "@/pages/LayoutIndex/index" },
 				{ path: "/article/:id", component: "@/pages/LayoutIndex/ArticleDetail/index" },
-				{ path: "/addArticle", component: "@/pages/LayoutIndex/AddArtice/index" }
+				{ path: "/addArticle", component: "@/pages/LayoutIndex/AddArtice/index" },
+				{ path: "/personalCenter", component: "@/pages/LayoutIndex/PersonalCenter/index" }
 			]
 		}
 	],

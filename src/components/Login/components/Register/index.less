@@ -1,11 +1,64 @@
 .register_form_container {
 	width: 100%;
 	height: 100%;
+
+	.ant-form {
+		max-width: 100% !important;
+	}
+
+	.ant-form-item {
+		margin-bottom: 20px !important;
+
+		.ant-form-item-label {
+			label {
+				color: #333333 !important;
+				font-size: 14px !important;
+				font-weight: 500 !important;
+			}
+		}
+
+		.ant-form-item-control {
+			.ant-input {
+				background: rgba(255, 255, 255, 0.9) !important;
+				border: 1px solid rgba(24, 144, 255, 0.3) !important;
+				border-radius: 8px !important;
+				padding: 10px 12px !important;
+				font-size: 14px !important;
+				color: #333333 !important;
+
+				&:focus {
+					border-color: #1890ff !important;
+					box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2) !important;
+				}
+			}
+
+			.ant-input-password {
+				.ant-input {
+					border-radius: 8px !important;
+				}
+			}
+		}
+	}
+
 	.register_button {
-		width: 100%;
-		height: 40px;
-		color: #ffffff;
-		border-radius: 4px;
-		background-color: #1e80ff;
+		width: 100% !important;
+		height: 44px !important;
+		color: #ffffff !important;
+		border-radius: 8px !important;
+		background-color: rgba(24, 144, 255, 0.9) !important;
+		border: 1px solid rgba(24, 144, 255, 0.4) !important;
+		font-size: 16px !important;
+		font-weight: 500 !important;
+		box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.3) !important;
+
+		&:hover {
+			background-color: #1890ff !important;
+			border-color: #1890ff !important;
+		}
+
+		&:active {
+			background-color: #096dd9 !important;
+			border-color: #096dd9 !important;
+		}
 	}
 }

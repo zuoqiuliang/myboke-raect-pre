@@ -11,6 +11,16 @@ export default {
 				...state,
 				userInfo: payload
 			};
+		},
+		logOut(state: any) {
+			// 清除cookie
+			Util.delCookie("token", "");
+			return {
+				...state,
+				isHasAuth: false,
+				NovaAuth: null,
+				userInfo: {}
+			};
 		}
 	},
 	effects: {

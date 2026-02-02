@@ -10,47 +10,32 @@
 	// 左侧分类导航
 	.types_con {
 		width: 180px;
-		background: rgba(255, 255, 255, 0.4);
-		backdrop-filter: blur(32px);
-		-webkit-backdrop-filter: blur(32px);
-		border: 2px solid rgba(24, 144, 255, 0.4);
+		background: rgba(255, 255, 255, 0.6);
+		backdrop-filter: blur(20px);
+		-webkit-backdrop-filter: blur(20px);
+		border: 1px solid rgba(24, 144, 255, 0.25);
 		border-radius: 20px;
 		box-shadow:
 			// 底部阴影（增强厚度感）
-			0 16px 32px rgba(24, 144, 255, 0.25),
+			0 8px 16px rgba(24, 144, 255, 0.15),
 			// 顶部高光（边框感）
-			inset 0 2px 0 rgba(255, 255, 255, 0.98),
+			inset 0 1px 0 rgba(255, 255, 255, 0.98),
 			// 底部内阴影（增强深度感）
-			inset 0 -2px 0 rgba(24, 144, 255, 0.18),
-			// 左侧内阴影
-			inset 2px 0 0 rgba(255, 255, 255, 0.98),
-			// 右侧内阴影
-			inset -2px 0 0 rgba(24, 144, 255, 0.18);
+			inset 0 -1px 0 rgba(24, 144, 255, 0.12);
 		padding: 20px;
 		box-sizing: border-box;
 		position: sticky;
 		top: 24px;
 		align-self: flex-start;
-		transition:
-			transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-			box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-			background 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-			border 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		// 移除过渡效果
+		// transition:
+		// 	transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+		// 	box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+		// 	background 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+		// 	border 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
 		&:hover {
-			transform: translateY(-3px);
-			box-shadow:
-				// 底部阴影（增强厚度感）
-				0 16px 32px rgba(24, 144, 255, 0.25),
-				// 顶部高光（边框感）
-				inset 0 2px 0 rgba(255, 255, 255, 0.98),
-				// 底部内阴影（增强深度感）
-				inset 0 -2px 0 rgba(24, 144, 255, 0.18),
-				// 左侧内阴影
-				inset 2px 0 0 rgba(255, 255, 255, 0.98),
-				// 右侧内阴影
-				inset -2px 0 0 rgba(24, 144, 255, 0.18);
-			border: 2px solid rgba(24, 144, 255, 0.4);
+			// 移除所有动画效果
 		}
 
 		.types_item_name {
@@ -89,12 +74,22 @@
 			-moz-osx-font-smoothing: grayscale;
 
 			&:hover {
-				background-color: rgba(255, 255, 255, 0.3);
 				color: #0066cc;
-				transform: translateY(-2px) scale(1.02);
+				background: rgba(24, 144, 255, 0.15);
+				border: 1px solid rgba(24, 144, 255, 0.3);
+				font-weight: 800;
+				transform: translateY(-3px) scale(1.02);
 				box-shadow:
-					0 4px 16px rgba(24, 144, 255, 0.3),
-					inset 0 1px 0 rgba(255, 255, 255, 1);
+					// 顶部高光
+					inset 0 2px 0 rgba(255, 255, 255, 1),
+					// 底部内阴影
+					inset 0 -2px 0 rgba(24, 144, 255, 0.18),
+					// 左侧内阴影
+					inset 2px 0 0 rgba(255, 255, 255, 1),
+					// 右侧内阴影
+					inset -2px 0 0 rgba(24, 144, 255, 0.12),
+					// 外部阴影
+					0 10px 24px rgba(24, 144, 255, 0.18);
 
 				.types_item_name {
 					color: #0066cc;

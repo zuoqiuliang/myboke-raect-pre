@@ -3,3 +3,69 @@
 	justify-content: center;
 	align-items: center;
 }
+
+// 使用:global覆盖ant-modal的默认padding
+:global {
+	.ant-modal {
+		padding: 0 !important;
+	}
+}
+
+.glass_modal {
+	.ant-modal-content {
+		background: rgba(255, 255, 255, 0.85) !important;
+		backdrop-filter: blur(32px) !important;
+		-webkit-backdrop-filter: blur(32px) !important;
+		border: 1px solid rgba(24, 144, 255, 0.3) !important;
+		border-radius: 20px !important;
+		box-shadow: 0 16px 40px rgba(24, 144, 255, 0.25) !important;
+		overflow: hidden !important;
+		padding: 0 !important;
+		margin: 0 !important;
+	}
+
+	.ant-modal-header {
+		background: rgba(255, 255, 255, 0.9) !important;
+		border-bottom: 1px solid rgba(24, 144, 255, 0.2) !important;
+		text-align: center !important;
+		padding: 20px !important;
+		margin: 0 !important;
+
+		.ant-modal-title {
+			color: #1890ff !important;
+			font-size: 18px !important;
+			font-weight: 600 !important;
+			text-align: center !important;
+			width: 100% !important;
+			margin: 0 !important;
+		}
+	}
+
+	.ant-modal-body {
+		padding: 24px 24px 0 !important;
+		background: rgba(255, 255, 255, 0.8) !important;
+		margin: 0 !important;
+	}
+
+	.ant-modal-footer:not(:empty) {
+		background: rgba(255, 255, 255, 0.9) !important;
+		border-top: 1px solid rgba(24, 144, 255, 0.2) !important;
+		padding: 16px 24px !important;
+		margin: 0 !important;
+	}
+
+	.ant-modal-footer:empty {
+		display: none !important;
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+
+	.ant-modal-close {
+		color: rgba(24, 144, 255, 0.7) !important;
+
+		&:hover {
+			color: #1890ff !important;
+			background: rgba(24, 144, 255, 0.1) !important;
+		}
+	}
+}

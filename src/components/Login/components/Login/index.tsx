@@ -3,6 +3,7 @@ import loginStyle from "./index.less";
 import type { FormProps } from "antd";
 import { Button, Checkbox, Form, Input } from "antd";
 import { login } from "@/api/login";
+import { getUserInfoApi } from "@/api/userInfo";
 import { useDispatch, useSelector } from "dva";
 export default function LoginForm({ handleCancel }: { handleCancel: () => void }) {
 	type FieldType = {
@@ -18,11 +19,21 @@ export default function LoginForm({ handleCancel }: { handleCancel: () => void }
 			.then((res) => {
 				console.log(res);
 				if (res) {
-					dispatch({
-						type: "userModel/setUserInfo",
-						payload: res
-					});
-					handleCancel();
+					// 登录成功后，获取用户信息
+					getUserInfoApi()
+						.then((userInfoRes) => {
+							console.log(userInfoRes);
+							if (userInfoRes) {
+								dispatch({
+									type: "userModel/setUserInfo",
+									payload: userInfoRes
+								});
+								handleCancel();
+							}
+						})
+						.catch((err) => {
+							console.log(err);
+						});
 				}
 			})
 			.catch((err) => {
