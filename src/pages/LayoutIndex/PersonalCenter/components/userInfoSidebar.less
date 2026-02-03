@@ -1,0 +1,105 @@
+.user_info_sidebar {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(24, 144, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(24, 144, 255, 0.1);
+  padding: 24px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.avatar_upload {
+  margin-bottom: 20px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.user_name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 8px;
+}
+
+.user_bio {
+  font-size: 14px;
+  color: #666666;
+  line-height: 1.4;
+  margin-bottom: 24px;
+  padding: 0 12px;
+}
+
+.user_stats {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 24px;
+  padding: 16px 0;
+  border-top: 1px solid rgba(24, 144, 255, 0.1);
+  border-bottom: 1px solid rgba(24, 144, 255, 0.1);
+}
+
+.stat_item {
+  text-align: center;
+}
+
+.stat_value {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1890ff;
+  margin-bottom: 4px;
+}
+
+.stat_label {
+  font-size: 12px;
+  color: #666666;
+}
+
+.user_details {
+  text-align: left;
+}
+
+.detail_item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: #666666;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  color: #1890ff;
+  flex-shrink: 0;
+}
+
+.label {
+  width: 40px;
+  flex-shrink: 0;
+  color: #999999;
+}
+
+.value {
+  flex: 1;
+  color: #333333;
+  word-break: break-all;
+}
+
+// 响应式设计
+@media (max-width: 1024px) {
+  .user_info_sidebar {
+    padding: 20px;
+  }
+
+  .user_stats {
+    padding: 12px 0;
+  }
+
+  .detail_item {
+    margin-bottom: 10px;
+  }
+}

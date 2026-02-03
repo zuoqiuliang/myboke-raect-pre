@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import loginStyle from "./index.less";
 import type { FormProps } from "antd";
 import { Button, Checkbox, Form, Input } from "antd";
@@ -12,9 +12,11 @@ export default function LoginForm({ handleCancel }: { handleCancel: () => void }
 		remember?: string;
 	};
 	const dispatch = useDispatch();
+	const [loading, setLoading] = useState(false);
 
 	const onFinish: FormProps<FieldType>["onFinish"] = (values: any) => {
 		console.log("Success:", values);
+		setLoading(true);
 		login(values)
 			.then((res) => {
 				console.log(res);
@@ -33,11 +35,17 @@ export default function LoginForm({ handleCancel }: { handleCancel: () => void }
 						})
 						.catch((err) => {
 							console.log(err);
+						})
+						.finally(() => {
+							setLoading(false);
 						});
 				}
 			})
 			.catch((err) => {
 				console.log(err);
+			})
+			.finally(() => {
+				setLoading(false);
 			});
 	};
 
@@ -61,7 +69,7 @@ export default function LoginForm({ handleCancel }: { handleCancel: () => void }
 					name="phone"
 					hasFeedback
 					rules={[{ required: true, message: "请输入手机号!" }]}>
-					<Input placeholder="请输入手机号" />
+					<Input placeholder="请输入手机号" disabled={loading} />
 				</Form.Item>
 
 				<Form.Item<FieldType>
@@ -69,15 +77,19 @@ export default function LoginForm({ handleCancel }: { handleCancel: () => void }
 					name="password"
 					hasFeedback
 					rules={[{ required: true, message: "请输入密码!" }]}>
-					<Input.Password placeholder="请输入密码" />
+					<Input.Password placeholder="请输入密码" disabled={loading} />
 				</Form.Item>
 
 				<Form.Item<FieldType> name="remember" valuePropName="checked" label={null}>
-					<Checkbox>记住密码</Checkbox>
+					<Checkbox disabled={loading}>记住密码</Checkbox>
 				</Form.Item>
 
 				<Form.Item label={null}>
-					<Button type="primary" htmlType="submit" className={loginStyle.login_button}>
+					<Button
+						type="primary"
+						htmlType="submit"
+						className={loginStyle.login_button}
+						loading={loading}>
 						登录
 					</Button>
 				</Form.Item>

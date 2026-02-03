@@ -1,284 +1,161 @@
 .personal_center_container {
-	padding: 40px 0;
-	background-color: #ffffff;
+  width: 100%;
+  min-height: 80vh;
+  padding: 40px 20px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
 
-	.main_content {
-		width: 100%;
-		max-width: 1080px;
-		margin: 0 auto;
-		padding: 0 24px;
-		display: flex;
-		gap: 32px;
+.main_content {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 30px;
+  align-items: flex-start;
+}
 
-		// 左侧用户信息
-		.left_con {
-			width: 320px;
-			background: rgba(255, 255, 255, 0.7);
-			backdrop-filter: blur(24px);
-			-webkit-backdrop-filter: blur(24px);
-			border: 1px solid rgba(24, 144, 255, 0.25);
-			border-radius: 24px;
-			box-shadow:
-				0 12px 32px rgba(24, 144, 255, 0.15),
-				inset 0 2px 0 rgba(255, 255, 255, 0.95),
-				inset 0 -2px 0 rgba(24, 144, 255, 0.12),
-				inset 2px 0 0 rgba(255, 255, 255, 0.9),
-				inset -2px 0 0 rgba(24, 144, 255, 0.08);
-			padding: 32px;
-			box-sizing: border-box;
-			position: sticky;
-			top: 84px;
-			align-self: flex-start;
+// 左侧tab栏
+.left_con {
+  width: 200px;
+  flex-shrink: 0;
+}
 
-			.avatar_upload {
-				width: 120px;
-				height: 120px;
-				margin: 0 auto 24px;
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				
-				.ant-upload {
-					width: 120px;
-					height: 120px;
-					border-radius: 50%;
-					border: 3px solid rgba(24, 144, 255, 0.3);
-					box-shadow: 0 8px 24px rgba(24, 144, 255, 0.2);
-					overflow: hidden;
-					
-					img {
-						width: 100%;
-						height: 100%;
-						object-fit: cover;
-					}
-					
-					.ant-upload-btn {
-						width: 100%;
-						height: 100%;
-						display: flex;
-						justify-content: center;
-						align-items: center;
-						background: rgba(255, 255, 255, 0.8);
-						backdrop-filter: blur(12px);
-						-webkit-backdrop-filter: blur(12px);
-						border: 1px dashed rgba(24, 144, 255, 0.3);
-						border-radius: 50%;
-						transition: all 0.3s ease;
-						
-						&:hover {
-							border-color: rgba(24, 144, 255, 0.6);
-							background: rgba(255, 255, 255, 0.9);
-						}
-					}
-				}
-			}
+.tab_container {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(24, 144, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(24, 144, 255, 0.1);
+  padding: 20px;
+  overflow: hidden;
+}
 
-			.user_name {
-				font-size: 24px;
-				font-weight: 600;
-				color: #1890ff;
-				text-align: center;
-				margin-bottom: 12px;
-				font-smooth: antialiased;
-				-webkit-font-smoothing: antialiased;
-				-moz-osx-font-smoothing: grayscale;
-			}
+.tab_title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1890ff;
+  margin-bottom: 24px;
+  text-align: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(24, 144, 255, 0.2);
+}
 
-			.user_bio {
-				font-size: 14px;
-				color: #8a919f;
-				text-align: center;
-				line-height: 1.4;
-				margin-bottom: 24px;
-			}
+.tab_list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 
-			.user_stats {
-				display: flex;
-				justify-content: space-around;
-				padding: 16px 0;
-				border-top: 1px solid rgba(24, 144, 255, 0.2);
-				border-bottom: 1px solid rgba(24, 144, 255, 0.2);
-				margin-bottom: 24px;
+.tab_item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #666666;
+  font-size: 14px;
 
-				.stat_item {
-					display: flex;
-					flex-direction: column;
-					align-items: center;
+  &:hover {
+    background: rgba(24, 144, 255, 0.1);
+    color: #1890ff;
+  }
+}
 
-					.stat_value {
-						font-size: 18px;
-						font-weight: 600;
-						color: #1890ff;
-						margin-bottom: 4px;
-					}
+.tab_item_active {
+  background: rgba(24, 144, 255, 0.15) !important;
+  color: #1890ff !important;
+  font-weight: 500;
+  box-shadow: inset 3px 0 0 #1890ff;
+}
 
-					.stat_label {
-						font-size: 12px;
-						color: #8a919f;
-					}
-				}
-			}
+.tab_icon {
+  font-size: 16px;
+}
 
-			.user_details {
-				margin-top: 24px;
+.tab_text {
+  flex: 1;
+}
 
-				.detail_item {
-					display: flex;
-					align-items: center;
-					gap: 12px;
-					margin-bottom: 16px;
+// 中间内容区域
+.middle_con {
+  flex: 1;
+  min-width: 0;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(24, 144, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(24, 144, 255, 0.1);
+  padding: 30px;
+  min-height: 600px;
+}
 
-					.icon {
-						font-size: 16px;
-						color: #1890ff;
-					}
-
-					.label {
-						font-size: 14px;
-						color: #8a919f;
-						min-width: 60px;
-					}
-
-					.value {
-						font-size: 14px;
-						color: #1d2129;
-						flex: 1;
-					}
-				}
-			}
-		}
-
-		// 右侧编辑区域
-		.right_con {
-			flex: 1;
-			background: rgba(255, 255, 255, 0.7);
-			backdrop-filter: blur(24px);
-			-webkit-backdrop-filter: blur(24px);
-			border: 1px solid rgba(24, 144, 255, 0.25);
-			border-radius: 24px;
-			box-shadow:
-				0 12px 32px rgba(24, 144, 255, 0.15),
-				inset 0 2px 0 rgba(255, 255, 255, 0.95),
-				inset 0 -2px 0 rgba(24, 144, 255, 0.12),
-				inset 2px 0 0 rgba(255, 255, 255, 0.9),
-				inset -2px 0 0 rgba(24, 144, 255, 0.08);
-			padding: 32px;
-			box-sizing: border-box;
-
-			.section_title {
-				font-size: 20px;
-				font-weight: 600;
-				color: #1890ff;
-				margin-bottom: 24px;
-				padding-bottom: 12px;
-				border-bottom: 1px solid rgba(24, 144, 255, 0.2);
-			}
-
-			.form_item {
-				margin-bottom: 24px;
-
-				.form_label {
-					font-size: 14px;
-					font-weight: 500;
-					color: #1d2129;
-					margin-bottom: 8px;
-					display: block;
-				}
-
-				.form_control {
-					width: 100%;
-					padding: 12px 16px;
-					border: 1px solid rgba(24, 144, 255, 0.3);
-					border-radius: 12px;
-					background: rgba(255, 255, 255, 0.8);
-					backdrop-filter: blur(12px);
-					-webkit-backdrop-filter: blur(12px);
-					font-size: 14px;
-					color: #1d2129;
-					transition: all 0.3s ease;
-
-					&:focus {
-						outline: none;
-						border-color: rgba(24, 144, 255, 0.6);
-						box-shadow: 0 0 0 3px rgba(24, 144, 255, 0.1);
-					}
-				}
-
-				.form_textarea {
-					width: 100%;
-					padding: 12px 16px;
-					border: 1px solid rgba(24, 144, 255, 0.3);
-					border-radius: 12px;
-					background: rgba(255, 255, 255, 0.8);
-					backdrop-filter: blur(12px);
-					-webkit-backdrop-filter: blur(12px);
-					font-size: 14px;
-					color: #1d2129;
-					resize: vertical;
-					min-height: 120px;
-					transition: all 0.3s ease;
-
-					&:focus {
-						outline: none;
-						border-color: rgba(24, 144, 255, 0.6);
-						box-shadow: 0 0 0 3px rgba(24, 144, 255, 0.1);
-					}
-				}
-			}
-
-			.submit_btn {
-				width: 100%;
-				padding: 12px 0;
-				background: rgba(24, 144, 255, 0.9);
-				backdrop-filter: blur(24px);
-				-webkit-backdrop-filter: blur(24px);
-				border: 1px solid rgba(24, 144, 255, 0.4);
-				border-radius: 12px;
-				color: #ffffff;
-				font-size: 16px;
-				font-weight: 500;
-				cursor: pointer;
-				transition: all 0.3s ease;
-				box-shadow:
-					0 8px 24px rgba(24, 144, 255, 0.3),
-					inset 0 2px 0 rgba(255, 255, 255, 0.3),
-					inset 0 -1px 0 rgba(24, 144, 255, 0.2);
-
-				&:hover {
-					background: rgba(24, 144, 255, 1);
-					transform: translateY(-2px);
-					box-shadow:
-						0 12px 32px rgba(24, 144, 255, 0.4),
-						inset 0 2px 0 rgba(255, 255, 255, 0.4),
-						inset 0 -1px 0 rgba(24, 144, 255, 0.3);
-				}
-
-				&:active {
-					transform: translateY(2px);
-					box-shadow:
-						0 4px 16px rgba(24, 144, 255, 0.2),
-						inset 0 2px 0 rgba(255, 255, 255, 0.3),
-						inset 0 -1px 0 rgba(24, 144, 255, 0.2);
-				}
-			}
-		}
-	}
+// 右侧个人信息区域
+.right_con {
+  width: 280px;
+  flex-shrink: 0;
 }
 
 // 响应式设计
+@media (max-width: 1024px) {
+  .main_content {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .left_con {
+    width: 100%;
+  }
+
+  .tab_container {
+    padding: 16px;
+  }
+
+  .tab_list {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .tab_item {
+    flex-direction: column;
+    gap: 6px;
+    padding: 12px;
+    text-align: center;
+  }
+
+  .tab_item_active {
+    box-shadow: inset 0 3px 0 #1890ff;
+  }
+
+  .right_con {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .middle_con {
+    min-height: 500px;
+  }
+}
+
 @media (max-width: 768px) {
-	.personal_center_container {
-		.main_content {
-			flex-direction: column;
+  .personal_center_container {
+    padding: 20px 16px;
+  }
 
-			.left_con {
-				width: 100%;
-				position: static;
-			}
+  .middle_con {
+    padding: 20px;
+  }
 
-			.right_con {
-				width: 100%;
-			}
-		}
-	}
+  .tab_list {
+    flex-wrap: wrap;
+  }
+
+  .tab_item {
+    flex: 1;
+    min-width: 80px;
+  }
 }

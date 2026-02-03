@@ -196,41 +196,46 @@ function index() {
 						left: 0,
 						width: "100vw",
 						height: "100vh",
-						background: "rgba(0, 0, 0, 0.3)",
-						backdropFilter: "blur(8px)",
-						WebkitBackdropFilter: "blur(8px)",
+						background:
+							"linear-gradient(135deg, rgba(24, 144, 255, 0.15), rgba(101, 116, 253, 0.15))",
+						backdropFilter: "blur(12px)",
+						WebkitBackdropFilter: "blur(12px)",
 						display: "flex",
 						alignItems: "center",
 						justifyContent: "center",
 						zIndex: 2000,
 						margin: 0,
-						padding: 0
+						padding: 0,
+						animation: "modalBgFadeIn 0.4s ease-out"
 					}}>
 					<div
 						style={{
-							background: "rgba(255, 255, 255, 0.85)",
-							backdropFilter: "blur(32px)",
-							WebkitBackdropFilter: "blur(32px)",
-							border: "1px solid rgba(24, 144, 255, 0.3)",
-							borderRadius: "20px",
-							boxShadow: "0 16px 40px rgba(24, 144, 255, 0.25)",
-							width: "320px",
+							background: "rgba(255, 255, 255, 0.92)",
+							backdropFilter: "blur(24px)",
+							WebkitBackdropFilter: "blur(24px)",
+							border: "1px solid rgba(24, 144, 255, 0.2)",
+							borderRadius: "24px",
+							boxShadow:
+								"0 20px 48px rgba(24, 144, 255, 0.2), 0 8px 16px rgba(24, 144, 255, 0.1)",
+							width: "340px",
 							overflow: "hidden",
-							animation: "modalFadeIn 0.3s ease-out"
+							animation: "modalSlideIn 0.4s ease-out"
 						}}>
 						{/* 标题栏 */}
 						<div
 							style={{
-								background: "rgba(255, 255, 255, 0.9)",
-								padding: "16px 20px",
-								borderBottom: "1px solid rgba(24, 144, 255, 0.2)",
+								background:
+									"linear-gradient(135deg, rgba(24, 144, 255, 0.05), rgba(101, 116, 253, 0.05))",
+								padding: "20px 24px",
+								borderBottom: "1px solid rgba(24, 144, 255, 0.15)",
 								textAlign: "center"
 							}}>
 							<div
 								style={{
 									color: "#1890ff",
-									fontSize: "16px",
-									fontWeight: "600"
+									fontSize: "18px",
+									fontWeight: "600",
+									letterSpacing: "0.5px"
 								}}>
 								确认退出登录
 							</div>
@@ -239,7 +244,7 @@ function index() {
 						{/* 内容区 */}
 						<div
 							style={{
-								padding: "24px 20px",
+								padding: "32px 24px",
 								textAlign: "center",
 								display: "flex",
 								alignItems: "center",
@@ -249,8 +254,9 @@ function index() {
 								style={{
 									color: "#333333",
 									margin: 0,
-									fontSize: "14px",
-									lineHeight: "1.5"
+									fontSize: "16px",
+									lineHeight: "1.6",
+									fontWeight: "400"
 								}}>
 								您确定要退出登录吗？
 							</p>
@@ -259,21 +265,31 @@ function index() {
 						{/* 按钮区 */}
 						<div
 							style={{
-								padding: "0 20px 20px",
+								padding: "0 24px 24px",
 								display: "flex",
-								gap: "12px",
+								gap: "16px",
 								justifyContent: "center"
 							}}>
 							<Button
 								onClick={cancelLogout}
 								style={{
-									background: "rgba(255, 255, 255, 0.8)",
-									border: "1px solid rgba(24, 144, 255, 0.3)",
-									borderRadius: "8px",
-									boxShadow: "inset 0 2px 0 rgba(255, 255, 255, 0.95)",
-									padding: "8px 20px",
+									background: "rgba(255, 255, 255, 0.95)",
+									border: "1px solid rgba(24, 144, 255, 0.25)",
+									borderRadius: "12px",
+									boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
+									padding: "10px 24px",
 									fontSize: "14px",
+									fontWeight: "500",
+									transition: "all 0.3s ease",
 									flex: 1
+								}}
+								onMouseEnter={(e) => {
+									e.currentTarget.style.transform = "translateY(-2px)";
+									e.currentTarget.style.boxShadow = "0 6px 16px rgba(0, 0, 0, 0.12)";
+								}}
+								onMouseLeave={(e) => {
+									e.currentTarget.style.transform = "translateY(0)";
+									e.currentTarget.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.08)";
 								}}>
 								取消
 							</Button>
@@ -281,13 +297,24 @@ function index() {
 								type="primary"
 								onClick={confirmLogout}
 								style={{
-									background: "rgba(24, 144, 255, 0.9)",
-									border: "1px solid rgba(24, 144, 255, 0.4)",
-									borderRadius: "8px",
-									boxShadow: "inset 0 2px 0 rgba(255, 255, 255, 0.3)",
-									padding: "8px 20px",
+									background: "linear-gradient(135deg, #1890ff, #6574fd)",
+									border: "1px solid rgba(24, 144, 255, 0.3)",
+									borderRadius: "12px",
+									boxShadow: "0 4px 12px rgba(24, 144, 255, 0.3)",
+									padding: "10px 24px",
 									fontSize: "14px",
+									fontWeight: "500",
+									color: "white",
+									transition: "all 0.3s ease",
 									flex: 1
+								}}
+								onMouseEnter={(e) => {
+									e.currentTarget.style.transform = "translateY(-2px)";
+									e.currentTarget.style.boxShadow = "0 6px 16px rgba(24, 144, 255, 0.4)";
+								}}
+								onMouseLeave={(e) => {
+									e.currentTarget.style.transform = "translateY(0)";
+									e.currentTarget.style.boxShadow = "0 4px 12px rgba(24, 144, 255, 0.3)";
 								}}>
 								确认退出
 							</Button>

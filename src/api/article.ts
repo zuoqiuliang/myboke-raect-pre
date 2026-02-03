@@ -35,3 +35,11 @@ export const getSignList = () => {
 		method: "GET"
 	});
 };
+
+// 更新文章
+export const updateArticle = (id: number, data: any) => {
+	return request(`/api/blog/${id}`, {
+		method: "PUT",
+		data
+	});
+};
