@@ -128,9 +128,18 @@
 				color: #1890ff;
 			}
 
+			&.operate_item_collected {
+				color: #ff4d4f;
+
+				.icon {
+					animation: collectStar 0.3s ease-in-out;
+				}
+			}
+
 			.icon {
 				font-size: 24px;
 				margin-bottom: 4px;
+				transition: all 0.2s;
 			}
 		}
 	}
@@ -176,6 +185,19 @@
 		}
 		100% {
 			transform: translateY(0);
+		}
+	}
+
+	// 收藏星星动画
+	@keyframes collectStar {
+		0% {
+			transform: scale(1);
+		}
+		50% {
+			transform: scale(1.2) rotate(15deg);
+		}
+		100% {
+			transform: scale(1);
 		}
 	}
 

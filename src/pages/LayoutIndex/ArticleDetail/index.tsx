@@ -2,15 +2,20 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "umi";
 import articleStyle from "./article.less";
 import { getArticleDetail } from "@/api/article";
+import { collectArticle, uncollectArticle } from "@/api/userCenter";
 import ArticleContent from "./components/ArticleContent";
 import AuthorInfo from "./components/AuthorInfo";
 import ArticleTOC from "./components/ArticleTOC";
-import { VerticalAlignTopOutlined } from "@ant-design/icons";
+import { VerticalAlignTopOutlined, StarOutlined, StarFilled } from "@ant-design/icons";
+import { message } from "antd";
 
 export default function index() {
 	const params = useParams();
 	const [article, setArticle] = useState<any>({});
 	const [isScrollToTopVisible, setIsScrollToTopVisible] = useState(false);
+	const [isCollected, setIsCollected] = useState(false);
+	const [collectionId, setCollectionId] = useState<string | null>(null);
+	const [collecting, setCollecting] = useState(false);
 
 	// 滚动到顶部函数
 	const scrollToTop = () => {
@@ -61,6 +66,39 @@ export default function index() {
 		};
 	}, []);
 
+	// 切换收藏状态
+	const handleCollect = async () => {
+		console.log(params);
+		const articleId: string = params.id as string;
+		if (!articleId) return;
+
+		setCollecting(true);
+		try {
+			if (isCollected) {
+				// 取消收藏
+				if (collectionId) {
+					await uncollectArticle(collectionId as string);
+					setIsCollected(false);
+					setCollectionId(null);
+					message.success("取消收藏成功!");
+				}
+			} else {
+				// 收藏文章
+				const res = await collectArticle(articleId as string);
+				if (res) {
+					setIsCollected(true);
+					setCollectionId(res.id);
+					message.success("收藏成功!");
+				}
+			}
+		} catch (error) {
+			console.error("操作失败:", error);
+			message.error(isCollected ? "取消收藏失败" : "收藏失败");
+		} finally {
+			setCollecting(false);
+		}
+	};
+
 	// 获取文章详情
 	useEffect(() => {
 		// 获取动态路由参数id
@@ -69,15 +107,23 @@ export default function index() {
 			getArticleDetail(articleId).then((res: any) => {
 				console.log(res);
 				setArticle(res);
+				// 更新收藏状态
+				setIsCollected(res.isCollected || false);
+				setCollectionId(res.collectionId || null);
 			});
 		}
 	}, [params.id]);
 	return (
 		<div className={articleStyle.article_container}>
 			<div className={articleStyle.operate}>
-				<div className={articleStyle.operate_item}>
-					<div className={articleStyle.icon}>❤</div>
-					收藏
+				<div
+					className={`${articleStyle.operate_item} ${isCollected ? articleStyle.operate_item_collected : ""}`}
+					onClick={handleCollect}
+					disabled={collecting}>
+					<div className={articleStyle.icon}>
+						{isCollected ? <StarFilled /> : <StarOutlined />}
+					</div>
+					{isCollected ? "已收藏" : "收藏"}
 				</div>
 				<div className={articleStyle.operate_item}>
 					<div className={articleStyle.icon}>👍</div>
