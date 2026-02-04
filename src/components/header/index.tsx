@@ -189,133 +189,29 @@ function index() {
 
 			{/* 退出登录确认弹窗 */}
 			{isLogoutModalVisible && (
-				<div
-					style={{
-						position: "fixed",
-						top: 0,
-						left: 0,
-						width: "100vw",
-						height: "100vh",
-						background:
-							"linear-gradient(135deg, rgba(24, 144, 255, 0.15), rgba(101, 116, 253, 0.15))",
-						backdropFilter: "blur(12px)",
-						WebkitBackdropFilter: "blur(12px)",
-						display: "flex",
-						alignItems: "center",
-						justifyContent: "center",
-						zIndex: 2000,
-						margin: 0,
-						padding: 0,
-						animation: "modalBgFadeIn 0.4s ease-out"
-					}}>
-					<div
-						style={{
-							background: "rgba(255, 255, 255, 0.92)",
-							backdropFilter: "blur(24px)",
-							WebkitBackdropFilter: "blur(24px)",
-							border: "1px solid rgba(24, 144, 255, 0.2)",
-							borderRadius: "24px",
-							boxShadow:
-								"0 20px 48px rgba(24, 144, 255, 0.2), 0 8px 16px rgba(24, 144, 255, 0.1)",
-							width: "340px",
-							overflow: "hidden",
-							animation: "modalSlideIn 0.4s ease-out"
-						}}>
+				<div className={headerStyle["logout-modal-backdrop"]}>
+					<div className={headerStyle["logout-modal-content"]}>
 						{/* 标题栏 */}
-						<div
-							style={{
-								background:
-									"linear-gradient(135deg, rgba(24, 144, 255, 0.05), rgba(101, 116, 253, 0.05))",
-								padding: "20px 24px",
-								borderBottom: "1px solid rgba(24, 144, 255, 0.15)",
-								textAlign: "center"
-							}}>
-							<div
-								style={{
-									color: "#1890ff",
-									fontSize: "18px",
-									fontWeight: "600",
-									letterSpacing: "0.5px"
-								}}>
-								确认退出登录
-							</div>
+						<div className={headerStyle["logout-modal-header"]}>
+							<div className={headerStyle["logout-modal-title"]}>确认退出登录</div>
 						</div>
 
 						{/* 内容区 */}
-						<div
-							style={{
-								padding: "32px 24px",
-								textAlign: "center",
-								display: "flex",
-								alignItems: "center",
-								justifyContent: "center"
-							}}>
-							<p
-								style={{
-									color: "#333333",
-									margin: 0,
-									fontSize: "16px",
-									lineHeight: "1.6",
-									fontWeight: "400"
-								}}>
-								您确定要退出登录吗？
-							</p>
+						<div className={headerStyle["logout-modal-body"]}>
+							<p className={headerStyle["logout-modal-message"]}>您确定要退出登录吗？</p>
 						</div>
 
 						{/* 按钮区 */}
-						<div
-							style={{
-								padding: "0 24px 24px",
-								display: "flex",
-								gap: "16px",
-								justifyContent: "center"
-							}}>
+						<div className={headerStyle["logout-modal-footer"]}>
 							<Button
 								onClick={cancelLogout}
-								style={{
-									background: "rgba(255, 255, 255, 0.95)",
-									border: "1px solid rgba(24, 144, 255, 0.25)",
-									borderRadius: "12px",
-									boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
-									padding: "10px 24px",
-									fontSize: "14px",
-									fontWeight: "500",
-									transition: "all 0.3s ease",
-									flex: 1
-								}}
-								onMouseEnter={(e) => {
-									e.currentTarget.style.transform = "translateY(-2px)";
-									e.currentTarget.style.boxShadow = "0 6px 16px rgba(0, 0, 0, 0.12)";
-								}}
-								onMouseLeave={(e) => {
-									e.currentTarget.style.transform = "translateY(0)";
-									e.currentTarget.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.08)";
-								}}>
+								className={`${headerStyle["logout-modal-btn"]} ${headerStyle["cancel-btn"]}`}>
 								取消
 							</Button>
 							<Button
 								type="primary"
 								onClick={confirmLogout}
-								style={{
-									background: "linear-gradient(135deg, #1890ff, #6574fd)",
-									border: "1px solid rgba(24, 144, 255, 0.3)",
-									borderRadius: "12px",
-									boxShadow: "0 4px 12px rgba(24, 144, 255, 0.3)",
-									padding: "10px 24px",
-									fontSize: "14px",
-									fontWeight: "500",
-									color: "white",
-									transition: "all 0.3s ease",
-									flex: 1
-								}}
-								onMouseEnter={(e) => {
-									e.currentTarget.style.transform = "translateY(-2px)";
-									e.currentTarget.style.boxShadow = "0 6px 16px rgba(24, 144, 255, 0.4)";
-								}}
-								onMouseLeave={(e) => {
-									e.currentTarget.style.transform = "translateY(0)";
-									e.currentTarget.style.boxShadow = "0 4px 12px rgba(24, 144, 255, 0.3)";
-								}}>
+								className={`${headerStyle["logout-modal-btn"]} ${headerStyle["confirm-btn"]}`}>
 								确认退出
 							</Button>
 						</div>
