@@ -11,7 +11,8 @@ export default defineConfig({
 				{ path: "/", component: "@/pages/LayoutIndex/index" },
 				{ path: "/article/:id", component: "@/pages/LayoutIndex/ArticleDetail/index" },
 				{ path: "/addArticle", component: "@/pages/LayoutIndex/AddArtice/index" },
-				{ path: "/personalCenter", component: "@/pages/LayoutIndex/PersonalCenter/index" }
+				{ path: "/personalCenter", component: "@/pages/LayoutIndex/PersonalCenter/index" },
+				{ path: "/messages", component: "@/pages/LayoutIndex/Messages/index" }
 			]
 		}
 	],

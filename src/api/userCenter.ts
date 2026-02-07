@@ -36,3 +36,26 @@ export const uncollectArticle = (id: string) => {
 		method: "DELETE"
 	});
 };
+
+// 点赞文章
+export const likeArticle = (articleId: string) => {
+	return request("/api/userLike", {
+		method: "POST",
+		data: { blogId: articleId }
+	});
+};
+
+// 取消点赞
+export const unlikeArticle = (id: string) => {
+	return request(`/api/userLike/${id}`, {
+		method: "DELETE"
+	});
+};
+
+// 获取消息列表
+export const getMessages = (data: any) => {
+	return request("/api/message/all", {
+		method: "GET",
+		params: data
+	});
+};

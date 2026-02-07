@@ -80,6 +80,30 @@ export default function ArticleItem({ article }: { article: any }) {
 								/>
 								{article.scanNumber || 0}
 							</div>
+							<div className={articleStyle.likeNumber}>
+								<Icon
+									className={articleStyle.likeNumberIcon}
+									style={{ fontSize: "16px", color: "#94a3b8" }}
+									component={() => (
+										<svg
+											t="1769352140216"
+											viewBox="0 0 24 24"
+											version="1.1"
+											xmlns="http://www.w3.org/2000/svg"
+											preserveAspectRatio="xMidYMid meet">
+											<path
+												d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73z"
+												fill="none"
+												stroke="currentColor"
+												strokeWidth="2"
+												strokeLinecap="round"
+												strokeLinejoin="round"
+											/>
+										</svg>
+									)}
+								/>
+								{article.likeCount || 0}
+							</div>
 							<div className={articleStyle.publish_time}>
 								{formatPublishTime(article.createdAt)}
 							</div>

@@ -2,11 +2,23 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "umi";
 import articleStyle from "./article.less";
 import { getArticleDetail } from "@/api/article";
-import { collectArticle, uncollectArticle } from "@/api/userCenter";
+import {
+	collectArticle,
+	uncollectArticle,
+	likeArticle,
+	unlikeArticle
+} from "@/api/userCenter";
 import ArticleContent from "./components/ArticleContent";
 import AuthorInfo from "./components/AuthorInfo";
 import ArticleTOC from "./components/ArticleTOC";
-import { VerticalAlignTopOutlined, StarOutlined, StarFilled } from "@ant-design/icons";
+import CommentSection from "./components/CommentSection";
+import {
+	VerticalAlignTopOutlined,
+	StarOutlined,
+	StarFilled,
+	LikeOutlined,
+	LikeFilled
+} from "@ant-design/icons";
 import { message } from "antd";
 
 export default function index() {
@@ -16,6 +28,11 @@ export default function index() {
 	const [isCollected, setIsCollected] = useState(false);
 	const [collectionId, setCollectionId] = useState<string | null>(null);
 	const [collecting, setCollecting] = useState(false);
+	const [isLiked, setIsLiked] = useState(false);
+	const [likeId, setLikeId] = useState<string | null>(null);
+	const [liking, setLiking] = useState(false);
+	const [likeCount, setLikeCount] = useState<number>(0);
+	const [commentCount, setCommentCount] = useState<number>(0);
 
 	// 滚动到顶部函数
 	const scrollToTop = () => {
@@ -76,18 +93,21 @@ export default function index() {
 		try {
 			if (isCollected) {
 				// 取消收藏
-				if (collectionId) {
-					await uncollectArticle(collectionId as string);
+				if (articleId) {
+					console.log("取消收藏", articleId);
+					const res = await uncollectArticle(articleId as string);
+					console.log(res);
 					setIsCollected(false);
 					setCollectionId(null);
 					message.success("取消收藏成功!");
 				}
 			} else {
 				// 收藏文章
+				console.log("收藏文章", articleId);
 				const res = await collectArticle(articleId as string);
 				if (res) {
 					setIsCollected(true);
-					setCollectionId(res.id);
+					// setCollectionId(res.id);
 					message.success("收藏成功!");
 				}
 			}
@@ -96,6 +116,41 @@ export default function index() {
 			message.error(isCollected ? "取消收藏失败" : "收藏失败");
 		} finally {
 			setCollecting(false);
+		}
+	};
+
+	// 切换点赞状态
+	const handleLike = async () => {
+		const articleId: string = params.id as string;
+		if (!articleId) return;
+
+		setLiking(true);
+		console.log(isLiked, articleId);
+		try {
+			if (isLiked) {
+				// 取消点赞
+				if (articleId) {
+					await unlikeArticle(articleId as string);
+					setIsLiked(false);
+					// setLikeId(null);
+					setLikeCount((prev) => Math.max(0, prev - 1));
+					message.success("取消点赞成功!");
+				}
+			} else {
+				// 点赞文章
+				const res = await likeArticle(articleId as string);
+				if (res) {
+					setIsLiked(true);
+					// setLikeId(res.id);
+					setLikeCount((prev) => prev + 1);
+					message.success("点赞成功!");
+				}
+			}
+		} catch (error) {
+			console.error("操作失败:", error);
+			message.error(isLiked ? "取消点赞失败" : "点赞失败");
+		} finally {
+			setLiking(false);
 		}
 	};
 
@@ -109,33 +164,36 @@ export default function index() {
 				setArticle(res);
 				// 更新收藏状态
 				setIsCollected(res.isCollected || false);
-				setCollectionId(res.collectionId || null);
+				setCollectionId(res.id || null);
+				// 更新点赞状态
+				setIsLiked(res.isLiked || false);
+				setLikeId(res.id || null);
+				setLikeCount(res.likeCount || 0);
+				// 更新评论数
+				setCommentCount(res.commentCount || 0);
 			});
 		}
 	}, [params.id]);
 	return (
 		<div className={articleStyle.article_container}>
-			<div className={articleStyle.operate}>
-				<div
-					className={`${articleStyle.operate_item} ${isCollected ? articleStyle.operate_item_collected : ""}`}
-					onClick={handleCollect}
-					disabled={collecting}>
-					<div className={articleStyle.icon}>
-						{isCollected ? <StarFilled /> : <StarOutlined />}
-					</div>
-					{isCollected ? "已收藏" : "收藏"}
-				</div>
-				<div className={articleStyle.operate_item}>
-					<div className={articleStyle.icon}>👍</div>
-					点赞
-				</div>
-				<div className={articleStyle.operate_item}>
-					<div className={articleStyle.icon}>🔗</div>
-					分享
-				</div>
-			</div>
 			<div className={articleStyle.main_content}>
-				<ArticleContent article={article} />
+				<div className={articleStyle.left_content}>
+					<ArticleContent
+						article={article}
+						commentCount={commentCount}
+						likeCount={likeCount}
+						isCollected={isCollected}
+						isLiked={isLiked}
+						onCollect={handleCollect}
+						onLike={handleLike}
+						collecting={collecting}
+						liking={liking}
+					/>
+					<CommentSection
+						articleId={params.id as string}
+						onCommentUpdate={setCommentCount}
+					/>
+				</div>
 				<div className={articleStyle.article_right}>
 					<AuthorInfo article={article} />
 					<ArticleTOC article={article} />

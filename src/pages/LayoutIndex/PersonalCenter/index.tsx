@@ -6,7 +6,7 @@ import UserInfoSidebar from "./components/UserInfoSidebar";
 import PersonalProfile from "./PersonalProfile";
 import MyArticles from "./MyArticles";
 import MyCollections from "./MyCollections";
-import Wrapper from "@/components/Auth/index";
+import withAuth from "@/components/Auth/index";
 
 function PersonalCenter() {
 	const dispatch = useDispatch();
@@ -82,4 +82,4 @@ function PersonalCenter() {
 	);
 }
 
-export default Wrapper(PersonalCenter);
+export default withAuth(PersonalCenter);

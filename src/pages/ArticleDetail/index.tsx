@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "umi";
 import { getArticleDetail } from "@/api/article";
-import { UserOutlined, EyeOutlined, CalendarOutlined, TagOutlined } from "@ant-design/icons";
+import {
+	UserOutlined,
+	EyeOutlined,
+	CalendarOutlined,
+	TagOutlined
+} from "@ant-design/icons";
 import styles from "./index.less";
 
 function ArticleDetail() {
@@ -95,13 +100,12 @@ function ArticleDetail() {
 					)}
 				</div>
 			</div>
-
 			{/* 文章内容 */}
 			<div className={styles.article_content}>
 				{/* 文章封面图 */}
-				{article.cover && (
+				{article.thumb && (
 					<div className={styles.article_cover}>
-						<img src={article.cover} alt={article.title} />
+						<img src={article.thumb} alt={article.title} />
 					</div>
 				)}
 

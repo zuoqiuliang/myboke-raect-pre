@@ -5,11 +5,12 @@ import {
 	PlusOutlined,
 	UserOutlined,
 	LogoutOutlined,
-	SettingOutlined
+	SettingOutlined,
+	BellOutlined
 } from "@ant-design/icons";
 import { Button } from "antd";
 import { useDispatch, useSelector } from "dva";
-import Wrapper from "@/components/Auth/index";
+import withAuth from "@/components/Auth/index";
 
 function index() {
 	const [isVisible, setIsVisible] = useState(true);
@@ -81,6 +82,11 @@ function index() {
 		hideDropdown();
 	};
 
+	// 点击消息中心
+	const toMessages = () => {
+		history.push("/messages");
+	};
+
 	// 显示退出登录确认弹窗
 	const showLogoutModal = () => {
 		setIsLogoutModalVisible(true);
@@ -130,6 +136,9 @@ function index() {
 						<div className={headerStyle.tab_con}>
 							<div className={headerStyle.tab_item} onClick={() => history.push("/")}>
 								首页
+							</div>
+							<div className={headerStyle.tab_item} onClick={toMessages}>
+								社区评论
 							</div>
 						</div>
 					</div>
@@ -222,4 +231,4 @@ function index() {
 	);
 }
 
-export default Wrapper(index);
+export default withAuth(index);

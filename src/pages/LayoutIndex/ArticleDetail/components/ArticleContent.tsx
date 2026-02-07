@@ -1,9 +1,18 @@
 import React, { useEffect, useRef } from "react";
 import articleStyle from "../article.less";
 import dayjs from "dayjs";
+import { StarOutlined, StarFilled, LikeOutlined, LikeFilled } from "@ant-design/icons";
 
 interface ArticleContentProps {
 	article: any;
+	commentCount?: number;
+	likeCount?: number;
+	isCollected?: boolean;
+	isLiked?: boolean;
+	onCollect?: () => void;
+	onLike?: () => void;
+	collecting?: boolean;
+	liking?: boolean;
 }
 
 // 递归获取所有TOC项的slug
@@ -18,7 +27,28 @@ const getAllTocSlugs = (tocItems: any[]): string[] => {
 	return slugs;
 };
 
-export default function ArticleContent({ article }: ArticleContentProps) {
+export default function ArticleContent({
+	article,
+	commentCount,
+	likeCount,
+	isCollected = false,
+	isLiked = false,
+	onCollect,
+	onLike,
+	collecting = false,
+	liking = false
+}: ArticleContentProps) {
+	// 调试：检查props是否正确接收
+	React.useEffect(() => {
+		console.log("ArticleContent props:", {
+			isCollected,
+			isLiked,
+			onCollect,
+			onLike,
+			collecting,
+			liking
+		});
+	}, [isCollected, isLiked, onCollect, onLike, collecting, liking]);
 	const contentRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
@@ -95,10 +125,58 @@ export default function ArticleContent({ article }: ArticleContentProps) {
 						</div>
 					))}
 				</div>
-				<div className={articleStyle.stats}>
-					<div>{article.likeCount || 0} 点赞</div>
-					<div>{article.commentCount || 0} 评论</div>
-					<div>{article.collectCount || 0} 收藏</div>
+				<div className={articleStyle.article_actions}>
+					<div
+						className={`${articleStyle.action_item} ${isLiked ? articleStyle.action_item_active : ""} ${liking ? articleStyle.action_item_disabled : ""}`}
+						onClick={() => {
+							console.log("Like button clicked", {
+								isLiked,
+								likeId: article.likeId,
+								onLike
+							});
+							if (!liking && onLike) {
+								onLike();
+							}
+						}}>
+						<div className={articleStyle.action_icon}>
+							{isLiked ? <LikeFilled /> : <LikeOutlined />}
+						</div>
+						<span className={articleStyle.action_text}>
+							{isLiked ? "已点赞" : "点赞"}
+						</span>
+						<span className={articleStyle.action_count}>{likeCount || 0}</span>
+					</div>
+					<div className={articleStyle.action_item}>
+						<div className={articleStyle.action_icon}>💬</div>
+						<span className={articleStyle.action_text}>评论</span>
+						<span className={articleStyle.action_count}>{commentCount || 0}</span>
+					</div>
+					<div
+						className={`${articleStyle.action_item} ${isCollected ? articleStyle.action_item_active : ""} ${collecting ? articleStyle.action_item_disabled : ""}`}
+						onClick={() => {
+							console.log("Collect button clicked", {
+								isCollected,
+								collectionId: article.collectionId,
+								onCollect
+							});
+							if (!collecting && onCollect) {
+								onCollect();
+							}
+						}}>
+						<div className={articleStyle.action_icon}>
+							{isCollected ? <StarFilled /> : <StarOutlined />}
+						</div>
+						<span className={articleStyle.action_text}>
+							{isCollected ? "已收藏" : "收藏"}
+						</span>
+						<span className={articleStyle.action_count}>
+							{article.favoriteCount || 0}
+						</span>
+					</div>
+					<div className={articleStyle.action_item}>
+						<div className={articleStyle.action_icon}>🔗</div>
+						<span className={articleStyle.action_text}>分享</span>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -3,6 +3,7 @@ import indexStyle from "./index.less";
 import ArticleType from "./components/ArticleType";
 import ArticleList from "./components/ArticleList";
 import WelcomeCard from "./components/WelcomeCard";
+import RecommendedArticles from "./components/RecommendedArticles";
 console.log(indexStyle);
 export default function index() {
 	const [currentType, setCurrentType] = useState("");
@@ -17,6 +18,7 @@ export default function index() {
 			</div>
 			<div className={indexStyle.recommend_con}>
 				<WelcomeCard />
+				<RecommendedArticles />
 			</div>
 		</div>
 	);
