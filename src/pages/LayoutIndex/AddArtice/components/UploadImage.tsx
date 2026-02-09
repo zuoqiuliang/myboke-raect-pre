@@ -48,18 +48,24 @@ export default function ({
 		}
 		return isJpgOrPng && isLt1M;
 	};
-	const onSuccess = (res: any, file: any) => {
-		console.log(file);
-		uploadUrl(file).then((res: any) => {
-			if (res) {
-				console.log(res);
-				setFileList([
-					{
-						url: res
-					}
-				]);
-			}
-		});
+	const customRequest: UploadProps["customRequest"] = ({ file, onSuccess, onError }) => {
+		uploadUrl(file)
+			.then((res: any) => {
+				if (res) {
+					console.log(res);
+					setFileList([
+						{
+							url: res
+						}
+					]);
+					onSuccess(res);
+				} else {
+					onError(new Error("上传失败"));
+				}
+			})
+			.catch((error) => {
+				onError(error);
+			});
 	};
 	const onRemove = (file: UploadFile) => {
 		console.log(file);
@@ -68,12 +74,11 @@ export default function ({
 	return (
 		<div>
 			<Upload
-				action=""
+				customRequest={customRequest}
 				listType="picture-card"
 				fileList={fileList}
 				onPreview={handlePreview}
 				beforeUpload={beforeUpload}
-				onSuccess={onSuccess}
 				onRemove={onRemove}>
 				{fileList.length >= 1 ? null : uploadButton}
 			</Upload>

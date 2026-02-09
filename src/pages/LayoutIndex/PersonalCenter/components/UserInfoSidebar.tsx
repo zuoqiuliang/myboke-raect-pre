@@ -55,29 +55,41 @@ function UserInfoSidebar() {
 		return isJpgOrPng && isLt1M;
 	};
 
-	// 处理头像上传成功
-	const onSuccess = (res: any, file: any) => {
-		uploadImage(file).then((res: any) => {
-			if (res) {
-				setFileList([
-					{
-						url: res
-					}
-				]);
-				setFormData({
-					...formData,
-					avatar: res
-				});
-				// 更新全局用户信息
-				dispatch({
-					type: "userModel/setUserInfo",
-					payload: {
-						...userInfo,
+	// 自定义上传逻辑
+	const customRequest: UploadProps["customRequest"] = ({ file, onSuccess, onError }) => {
+		uploadImage(file)
+			.then((res: any) => {
+				if (res) {
+					setFileList([
+						{
+							url: res
+						}
+					]);
+					setFormData({
+						...formData,
 						avatar: res
-					}
-				});
-			}
-		});
+					});
+					// 更新全局用户信息
+					dispatch({
+						type: "userModel/setUserInfo",
+						payload: {
+							...userInfo,
+							avatar: res
+						}
+					});
+					onSuccess(res);
+				} else {
+					onError(new Error("上传失败"));
+				}
+			})
+			.catch((error) => {
+				onError(error);
+			});
+	};
+
+	// 处理头像上传成功（现在由 customRequest 调用）
+	const onSuccess = (res: any, file: any) => {
+		// 这里可以添加额外的成功处理逻辑
 	};
 
 	// 处理头像删除
@@ -153,7 +165,7 @@ function UserInfoSidebar() {
 		<div className={userInfoSidebarStyle.user_info_sidebar}>
 			<div className={userInfoSidebarStyle.avatar_upload}>
 				<Upload
-					action=""
+					customRequest={customRequest}
 					listType="picture-circle"
 					fileList={fileList}
 					onPreview={handlePreview}
