@@ -131,7 +131,7 @@ function index() {
 				<div className={headerStyle.main}>
 					<div className={headerStyle.left_con}>
 						<div className={headerStyle.logo_con}>
-							<img src={require("@/assets/logo.png")} className="" alt="" />
+							<span className={headerStyle.logo_text}>超级码力</span>
 						</div>
 						<div className={headerStyle.tab_con}>
 							<div className={headerStyle.tab_item} onClick={() => history.push("/")}>

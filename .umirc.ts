@@ -11,7 +11,10 @@ export default defineConfig({
 				{ path: "/", component: "@/pages/LayoutIndex/index" },
 				{ path: "/article/:id", component: "@/pages/LayoutIndex/ArticleDetail/index" },
 				{ path: "/addArticle", component: "@/pages/LayoutIndex/AddArtice/index" },
-				{ path: "/personalCenter", component: "@/pages/LayoutIndex/PersonalCenter/index" },
+				{
+					path: "/personalCenter",
+					component: "@/pages/LayoutIndex/PersonalCenter/index"
+				},
 				{ path: "/messages", component: "@/pages/LayoutIndex/Messages/index" }
 			]
 		}
@@ -27,9 +30,10 @@ export default defineConfig({
 	dva: {},
 	proxy: {
 		"/api": {
-			target: "http://localhost:3009",
+			target: "http://123.56.177.104",
 			changeOrigin: true,
 			pathRewrite: (path) => path.replace(/^\/api/, "/api")
 		}
-	}
+	},
+	esbuildMinifyIIFE: true
 });
