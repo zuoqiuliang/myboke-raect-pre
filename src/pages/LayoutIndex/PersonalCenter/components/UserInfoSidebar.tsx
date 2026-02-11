@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useImperativeHandle, forwardRef } from "react";
 import userInfoSidebarStyle from "./userInfoSidebar.less";
 import {
 	MailOutlined,
@@ -12,7 +12,11 @@ import { Upload, Modal, message } from "antd";
 import type { UploadFile, UploadProps } from "antd/es/upload/interface";
 import { uploadImage } from "@/api/upload";
 
-function UserInfoSidebar() {
+interface UserInfoSidebarMethods {
+	getFileList: () => UploadFile[];
+}
+
+const UserInfoSidebar = forwardRef<UserInfoSidebarMethods, any>((props, ref) => {
 	const dispatch = useDispatch();
 	const userInfo = useSelector((state: any) => {
 		return state.userModel.userInfo;
@@ -31,7 +35,13 @@ function UserInfoSidebar() {
 	const [fileList, setFileList] = useState<UploadFile[]>([]);
 	const [previewOpen, setPreviewOpen] = useState(false);
 	const [previewImage, setPreviewImage] = useState("");
-
+	// 只有当 ref 存在时才使用 useImperativeHandle
+	if (ref) {
+		useImperativeHandle(ref, () => ({
+			// 可以暴露一些方法或状态给父组件调用
+			getFileList: () => fileList
+		}));
+	}
 	// 处理头像预览
 	const handlePreview = async (file: UploadFile) => {
 		if (!file.url && !file.preview) {
@@ -246,6 +256,7 @@ function UserInfoSidebar() {
 			</div>
 		</div>
 	);
-}
+});
 
+UserInfoSidebar.displayName = "UserInfoSidebar";
 export default UserInfoSidebar;

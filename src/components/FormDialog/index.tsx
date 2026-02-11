@@ -26,8 +26,8 @@ export default function index({
 	return (
 		<div className={formDialogStyle.form_dialog_container}>
 			<Modal
+				mask={{ closable: false }}
 				title={title}
-				maskClosable={false}
 				keyboard={false}
 				getContainer={false}
 				closable={{ "aria-label": "Custom Close Button" }}

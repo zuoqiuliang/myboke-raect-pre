@@ -5,7 +5,7 @@ import "@/less/reset.less";
 import layoutStyle from "./LayoutIndex/less/layout.less";
 import Login from "@/components/Login/index";
 import { useDispatch, useSelector } from "umi";
-
+import "@/less/AlibabaPuHuiTi-2.less";
 export default function LayoutIndex() {
 	const dispatch = useDispatch();
 	const isShowLoginModal = useSelector((state: any) => {
