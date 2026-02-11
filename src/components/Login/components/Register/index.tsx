@@ -3,7 +3,11 @@ import registerStyle from "./index.less";
 import type { FormProps } from "antd";
 import { Button, Checkbox, Form, Input, message } from "antd";
 import { resgister } from "@/api/login";
-export default function RegisterForm() {
+export default function RegisterForm({
+	registerSuccess
+}: {
+	registerSuccess: () => void;
+}) {
 	type FieldType = {
 		phone?: string;
 		password?: string;
@@ -16,6 +20,7 @@ export default function RegisterForm() {
 			.then((res) => {
 				console.log(res);
 				if (res) {
+					registerSuccess();
 					message.success("注册成功!");
 				} else {
 					message.error(res.msg || "注册失败!");

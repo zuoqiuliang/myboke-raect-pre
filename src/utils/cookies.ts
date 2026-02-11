@@ -33,19 +33,19 @@ const Util: utilFn = {
 			escape(value) +
 			(expiredays == null ? "" : ";expires=" + exdate.toUTCString());
 	},
-	delCookie: (name, domain: string = "") => {
-		function getDomain(domain: string) {
-			if (!domain) return "";
-			return ";path=/;domain=" + domain;
-		}
-		var exp = new Date();
-		exp.setTime(exp.getTime() - 1);
-		var cval = Util.getCookie(name);
-		if (cval !== null) {
-			document.cookie = `${name}=${cval};expires=${exp.toUTCString()}${getDomain(
-				domain
-			)}`;
-		}
+	delCookie: (name: string, domain?: string, path?: string) => {
+		const cookieParts = [
+			`${name}=`,
+			"expires=Thu, 01 Jan 1970 00:00:00 UTC",
+			`path=${path || "/"}`,
+			domain ? `domain=${domain}` : "",
+			"secure",
+			"SameSite=Lax"
+		]
+			.filter(Boolean)
+			.join("; ");
+
+		document.cookie = cookieParts;
 	}
 };
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import myArticlesStyle from "./myArticles.less";
 import { history } from "umi";
 import { EditOutlined, DeleteOutlined, EyeOutlined } from "@ant-design/icons";
-import { useDispatch, useSelector } from "dva";
+import { useDispatch, useSelector } from "umi";
 import { message } from "antd";
 import { getMyArticleList, deleteArticle } from "@/api/userCenter";
 import DeleteConfirmModal from "@/components/DeleteConfirmModal";
@@ -124,10 +124,7 @@ function MyArticles() {
 						</div>
 					) : (
 						articles.map((article: any) => (
-							<div
-								key={article.id}
-								className={myArticlesStyle.article_item}
-								onClick={() => handleView(article.id)}>
+							<div key={article.id} className={myArticlesStyle.article_item}>
 								<div className={myArticlesStyle.article_header}>
 									<h3 className={myArticlesStyle.article_title}>{article.title}</h3>
 									<div className={myArticlesStyle.article_status}>

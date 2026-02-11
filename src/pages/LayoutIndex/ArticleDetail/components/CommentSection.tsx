@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getArticleComments, submitComment, deleteComment } from "@/api/article";
 import { message } from "antd";
-import { useSelector, useDispatch } from "dva";
+import { useSelector, useDispatch } from "umi";
 import dayjs from "dayjs";
 import articleStyle from "../article.less";
 

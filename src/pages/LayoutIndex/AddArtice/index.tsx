@@ -205,6 +205,18 @@ export default function index() {
 	return (
 		<div className={addArticleStyle.add_article_container}>
 			<div className={addArticleStyle.add_article_main}>
+				<div className={addArticleStyle.add_article_header}>
+					<h1 className={addArticleStyle.add_article_title}>
+						{mode === "add" && "创作文章"}
+						{mode === "edit" && "编辑文章"}
+						{mode === "view" && "查看文章"}
+					</h1>
+					<p className={addArticleStyle.add_article_description}>
+						{mode === "add" && "在这里开始你的创作之旅，分享你的知识和见解"}
+						{mode === "edit" && "编辑你的文章内容，完善你的创作"}
+						{mode === "view" && "查看文章详情"}
+					</p>
+				</div>
 				<Form
 					name="add_article_form"
 					form={form}

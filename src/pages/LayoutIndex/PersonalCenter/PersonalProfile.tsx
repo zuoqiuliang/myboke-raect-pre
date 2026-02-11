@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import personalProfileStyle from "./personalProfile.less";
-import { useDispatch, useSelector } from "dva";
+import { useDispatch, useSelector } from "umi";
 import { getUserInfoApi, updateUserInfo } from "@/api/userInfo";
 import { message } from "antd";
 

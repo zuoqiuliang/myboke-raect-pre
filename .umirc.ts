@@ -30,7 +30,7 @@ export default defineConfig({
 	dva: {},
 	proxy: {
 		"/api": {
-			target: "http://123.56.177.104",
+			target: "http://localhost:3009",
 			changeOrigin: true,
 			pathRewrite: (path) => path.replace(/^\/api/, "/api")
 		}

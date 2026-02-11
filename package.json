@@ -12,6 +12,7 @@
     "@ant-design/icons": "~6.1.0",
     "@toast-ui/editor": "^3.2.2",
     "@toast-ui/react-editor": "^3.2.3",
+    "antd": "^6.3.0",
     "classnames": "^2.5.1",
     "dayjs": "^1.11.19",
     "umi": "^4.6.8"

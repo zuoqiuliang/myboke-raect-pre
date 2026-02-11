@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import myCollectionsStyle from "./myCollections.less";
 import { history } from "umi";
 import { DeleteOutlined, EyeOutlined } from "@ant-design/icons";
-import { useDispatch, useSelector } from "dva";
+import { useDispatch, useSelector } from "umi";
 import { message } from "antd";
 import { getMyCollections, uncollectArticle } from "@/api/userCenter";
 

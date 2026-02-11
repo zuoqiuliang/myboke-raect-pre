@@ -24,11 +24,14 @@ export default function index({
 	const handleCancel = () => {
 		close();
 	};
+	const registerSuccess = () => {
+		setCurrentTab("login");
+	};
 	function tabForm(tab: string) {
 		if (tab === "login") {
 			return <LoginForm handleCancel={handleCancel} />;
 		} else if (tab === "register") {
-			return <RegisterForm />;
+			return <RegisterForm registerSuccess={registerSuccess} />;
 		}
 	}
 	return (

@@ -9,9 +9,9 @@ import {
 	BellOutlined
 } from "@ant-design/icons";
 import { Button } from "antd";
-import { useDispatch, useSelector } from "dva";
+import { useDispatch, useSelector } from "umi";
 import withAuth from "@/components/Auth/index";
-
+import Util from "@/utils/cookies";
 function index() {
 	const [isVisible, setIsVisible] = useState(true);
 	const [lastScrollTop, setLastScrollTop] = useState(0);
@@ -56,6 +56,10 @@ function index() {
 	}, [lastScrollTop]);
 
 	const addArtice = () => {
+		if (!userInfo.userName) {
+			toLogin();
+			return;
+		}
 		history.push("/addArticle");
 	};
 
@@ -99,6 +103,9 @@ function index() {
 			type: "userModel/logOut",
 			payload: {}
 		});
+		// 清除token
+		Util.delCookie("token", "");
+		console.log(Util.getCookie("token"));
 		// 退出登录后，跳转到登录页
 		history.push("/");
 		setIsLogoutModalVisible(false);

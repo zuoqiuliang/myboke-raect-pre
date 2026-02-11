@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import articleStyle from "../article.less";
 import dayjs from "dayjs";
 import { StarOutlined, StarFilled, LikeOutlined, LikeFilled } from "@ant-design/icons";
+import { useDispatch, useSelector } from "umi";
 
 interface ArticleContentProps {
 	article: any;
@@ -38,6 +39,21 @@ export default function ArticleContent({
 	collecting = false,
 	liking = false
 }: ArticleContentProps) {
+	const dispatch = useDispatch();
+	const userInfo = useSelector((state: any) => {
+		return state.userModel.userInfo;
+	});
+
+	// 检查用户是否登录
+	const isLoggedIn = !!userInfo?.userName;
+
+	// 显示登录弹窗
+	const toLogin = () => {
+		dispatch({
+			type: "loginModel/setIsShowLoginModal",
+			payload: true
+		});
+	};
 	// 调试：检查props是否正确接收
 	React.useEffect(() => {
 		console.log("ArticleContent props:", {
@@ -132,8 +148,13 @@ export default function ArticleContent({
 							console.log("Like button clicked", {
 								isLiked,
 								likeId: article.likeId,
-								onLike
+								onLike,
+								isLoggedIn
 							});
+							if (!isLoggedIn) {
+								toLogin();
+								return;
+							}
 							if (!liking && onLike) {
 								onLike();
 							}
@@ -146,7 +167,15 @@ export default function ArticleContent({
 						</span>
 						<span className={articleStyle.action_count}>{likeCount || 0}</span>
 					</div>
-					<div className={articleStyle.action_item}>
+					<div
+						className={articleStyle.action_item}
+						onClick={() => {
+							if (!isLoggedIn) {
+								toLogin();
+								return;
+							}
+							// 这里可以添加评论区滚动或其他评论相关逻辑
+						}}>
 						<div className={articleStyle.action_icon}>💬</div>
 						<span className={articleStyle.action_text}>评论</span>
 						<span className={articleStyle.action_count}>{commentCount || 0}</span>
@@ -157,8 +186,13 @@ export default function ArticleContent({
 							console.log("Collect button clicked", {
 								isCollected,
 								collectionId: article.collectionId,
-								onCollect
+								onCollect,
+								isLoggedIn
 							});
+							if (!isLoggedIn) {
+								toLogin();
+								return;
+							}
 							if (!collecting && onCollect) {
 								onCollect();
 							}
@@ -173,7 +207,16 @@ export default function ArticleContent({
 							{article.favoriteCount || 0}
 						</span>
 					</div>
-					<div className={articleStyle.action_item}>
+					<div
+						className={articleStyle.action_item}
+						onClick={() => {
+							if (!isLoggedIn) {
+								toLogin();
+								return;
+							}
+							// 这里可以添加分享相关逻辑
+							console.log("Share button clicked");
+						}}>
 						<div className={articleStyle.action_icon}>🔗</div>
 						<span className={articleStyle.action_text}>分享</span>
 					</div>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import personalCenterStyle from "./index.less";
 import { UserOutlined, FileTextOutlined, StarOutlined } from "@ant-design/icons";
-import { useDispatch, useSelector } from "dva";
+import { useDispatch, useSelector } from "umi";
 import UserInfoSidebar from "./components/UserInfoSidebar";
 import PersonalProfile from "./PersonalProfile";
 import MyArticles from "./MyArticles";

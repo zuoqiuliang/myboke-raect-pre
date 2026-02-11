@@ -4,7 +4,7 @@ import Header from "../components/header";
 import "@/less/reset.less";
 import layoutStyle from "./LayoutIndex/less/layout.less";
 import Login from "@/components/Login/index";
-import { useDispatch, useSelector } from "dva";
+import { useDispatch, useSelector } from "umi";
 
 export default function LayoutIndex() {
 	const dispatch = useDispatch();

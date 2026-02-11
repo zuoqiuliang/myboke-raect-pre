@@ -4,7 +4,8 @@ import type { FormProps } from "antd";
 import { Button, Checkbox, Form, Input } from "antd";
 import { login } from "@/api/login";
 import { getUserInfoApi } from "@/api/userInfo";
-import { useDispatch, useSelector } from "dva";
+import { useDispatch, useSelector } from "umi";
+import { history } from "umi";
 export default function LoginForm({ handleCancel }: { handleCancel: () => void }) {
 	type FieldType = {
 		phone?: string;
@@ -30,6 +31,7 @@ export default function LoginForm({ handleCancel }: { handleCancel: () => void }
 									type: "userModel/setUserInfo",
 									payload: userInfoRes
 								});
+								window.location.reload();
 								handleCancel();
 							}
 						})

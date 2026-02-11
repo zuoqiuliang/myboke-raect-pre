@@ -6,7 +6,7 @@ import {
 	HomeOutlined,
 	UserOutlined
 } from "@ant-design/icons";
-import { useDispatch, useSelector } from "dva";
+import { useDispatch, useSelector } from "umi";
 import { getUserInfoApi } from "@/api/userInfo";
 import { Upload, Modal, message } from "antd";
 import type { UploadFile, UploadProps } from "antd/es/upload/interface";
