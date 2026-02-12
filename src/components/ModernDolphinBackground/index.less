@@ -1,0 +1,191 @@
+/* 现代海豚背景样式 */
+:global {
+	.modern_dolphin_background {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100vh;
+		z-index: -1;
+		overflow: hidden;
+		background: linear-gradient(
+			135deg,
+			rgba(255, 255, 255, 0.9) 0%,
+			rgba(240, 245, 255, 0.9) 100%
+		);
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
+		border: 1px solid rgba(255, 255, 255, 0.1);
+	}
+
+	/* 海豚样式 */
+	.dolphin {
+		position: absolute;
+		bottom: 100px;
+		left: -100px;
+		width: 100px;
+		height: 50px;
+		background: linear-gradient(
+			135deg,
+			rgba(24, 144, 255, 0.8) 0%,
+			rgba(10, 100, 200, 0.9) 100%
+		);
+		border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+		box-shadow:
+			0 4px 12px rgba(0, 0, 0, 0.1),
+			inset 0 2px 0 rgba(255, 255, 255, 0.3);
+		opacity: 0.8;
+		animation:
+			swim linear infinite,
+			dolphinWiggle ease-in-out infinite;
+		animation-duration: 20s, 2s;
+
+		&::before {
+			content: "";
+			position: absolute;
+			right: -12px;
+			top: 50%;
+			transform: translateY(-50%);
+			width: 24px;
+			height: 24px;
+			background: linear-gradient(
+				135deg,
+				rgba(24, 144, 255, 0.7) 0%,
+				rgba(10, 100, 200, 0.8) 100%
+			);
+			border-radius: 50%;
+			box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.3);
+		}
+
+		&::after {
+			content: "";
+			position: absolute;
+			left: 12px;
+			top: 50%;
+			transform: translateY(-50%);
+			width: 12px;
+			height: 12px;
+			background: white;
+			border-radius: 50%;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+		}
+	}
+
+	/* 游泳动画 */
+	@keyframes swim {
+		0% {
+			transform: translateX(-100px) translateY(0) rotateY(0deg);
+			opacity: 0;
+		}
+		10% {
+			opacity: 0.8;
+			transform: translateX(calc(10vw - 100px)) translateY(0) rotateY(0deg);
+		}
+		20% {
+			transform: translateX(calc(20vw - 100px)) translateY(-25px) rotateY(0deg);
+		}
+		30% {
+			transform: translateX(calc(30vw - 100px)) translateY(-15px) rotateY(0deg);
+		}
+		40% {
+			transform: translateX(calc(40vw - 100px)) translateY(-30px) rotateY(0deg);
+		}
+		50% {
+			transform: translateX(calc(50vw - 100px)) translateY(-20px) rotateY(0deg);
+		}
+		60% {
+			transform: translateX(calc(60vw - 100px)) translateY(-35px) rotateY(0deg);
+		}
+		70% {
+			transform: translateX(calc(70vw - 100px)) translateY(-15px) rotateY(0deg);
+		}
+		80% {
+			transform: translateX(calc(80vw - 100px)) translateY(-25px) rotateY(0deg);
+		}
+		90% {
+			opacity: 0.8;
+			transform: translateX(calc(90vw - 100px)) translateY(0) rotateY(0deg);
+		}
+		100% {
+			transform: translateX(calc(100vw + 100px)) translateY(0) rotateY(0deg);
+			opacity: 0;
+		}
+	}
+
+	/* 海豚身体摆动动画 */
+	@keyframes dolphinWiggle {
+		0%,
+		100% {
+			transform: rotateZ(0deg);
+		}
+		25% {
+			transform: rotateZ(2deg);
+		}
+		75% {
+			transform: rotateZ(-2deg);
+		}
+	}
+
+	/* 波浪效果 */
+	.wave {
+		position: absolute;
+		width: 200%;
+		height: 120px;
+		background: linear-gradient(
+			90deg,
+			rgba(24, 144, 255, 0.05) 0%,
+			rgba(10, 100, 200, 0.08) 50%,
+			rgba(24, 144, 255, 0.05) 100%
+		);
+		border-radius: 50%;
+		animation: wave linear infinite;
+	}
+
+	.wave1 {
+		top: 20%;
+		left: -50%;
+		animation-duration: 18s;
+	}
+
+	.wave2 {
+		top: 40%;
+		left: -50%;
+		animation-duration: 22s;
+		animation-delay: 2s;
+	}
+
+	.wave3 {
+		top: 60%;
+		left: -50%;
+		animation-duration: 25s;
+		animation-delay: 4s;
+	}
+
+	@keyframes wave {
+		0% {
+			transform: translateX(0);
+		}
+		100% {
+			transform: translateX(-50%);
+		}
+	}
+
+	/* 气泡效果 */
+	.bubble {
+		position: absolute;
+		background: rgba(255, 255, 255, 0.2);
+		border-radius: 50%;
+		animation: float linear infinite;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	}
+
+	@keyframes float {
+  0% {
+    transform: translateY(100vh) scale(0);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-100px) scale(1);
+    opacity: 0;
+  }
+}

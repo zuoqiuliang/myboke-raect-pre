@@ -56,52 +56,78 @@
 			display: flex;
 			align-items: center;
 			font-size: 16px;
-			font-weight: 700;
+			font-weight: 600;
 			cursor: pointer;
-			padding: 14px 20px;
-			margin-bottom: 10px;
-			border-radius: 12px;
-			transition: all 0.3s ease;
-			color: #1890ff;
+			padding: 16px 22px;
+			margin-bottom: 8px;
+			border-radius: 16px;
+			transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+			color: #64748b;
 			transform: translateY(0) scale(1);
-			background: rgba(24, 144, 255, 0.1);
-			border: 1px solid transparent;
+			background: rgba(255, 255, 255, 0.6);
+			backdrop-filter: blur(16px);
+			-webkit-backdrop-filter: blur(16px);
+			border: 1px solid rgba(24, 144, 255, 0.1);
 			box-shadow:
-				0 2px 8px rgba(24, 144, 255, 0.1),
+				0 4px 12px rgba(0, 0, 0, 0.08),
 				inset 0 1px 0 rgba(255, 255, 255, 0.95);
 			font-smooth: antialiased;
 			-webkit-font-smoothing: antialiased;
 			-moz-osx-font-smoothing: grayscale;
 
+			// 默认状态下图标颜色与字体颜色一致
+			.anticon svg {
+				fill: #64748b !important;
+			}
+
+			> span svg {
+				fill: #64748b !important;
+			}
+
+			svg {
+				fill: #64748b !important;
+			}
+
 			&:hover {
-				color: #0066cc;
-				background: rgba(24, 144, 255, 0.15);
+				color: #1890ff;
+				background: rgba(24, 144, 255, 0.1);
+				backdrop-filter: blur(20px);
+				-webkit-backdrop-filter: blur(20px);
 				border: 1px solid rgba(24, 144, 255, 0.3);
-				font-weight: 800;
-				transform: translateY(-3px) scale(1.02);
+				font-weight: 700;
+				transform: translateY(-2px) scale(1.01);
 				box-shadow:
 					// 顶部高光
-					inset 0 2px 0 rgba(255, 255, 255, 1),
+					inset 0 2px 0 rgba(255, 255, 255, 0.9),
 					// 底部内阴影
-					inset 0 -2px 0 rgba(24, 144, 255, 0.18),
-					// 左侧内阴影
-					inset 2px 0 0 rgba(255, 255, 255, 1),
-					// 右侧内阴影
-					inset -2px 0 0 rgba(24, 144, 255, 0.12),
+					inset 0 -1px 0 rgba(24, 144, 255, 0.15),
 					// 外部阴影
-					0 10px 24px rgba(24, 144, 255, 0.18);
+					0 8px 20px rgba(24, 144, 255, 0.15);
 
 				.types_item_name {
-					color: #0066cc;
-					font-weight: 800;
+					color: #1890ff;
+					font-weight: 700;
+				}
+
+				// hover 状态下图标颜色与文字颜色一致
+				.anticon svg {
+					fill: #1890ff !important;
+				}
+
+				> span svg {
+					fill: #1890ff !important;
+				}
+
+				svg {
+					fill: #1890ff !important;
 				}
 			}
 
 			.types_item_name {
-				margin-left: 12px;
+				margin-left: 14px;
 				font-size: 14px;
-				color: #1890ff;
-				font-weight: 700;
+				color: #64748b;
+				font-weight: 600;
 				transition: all 0.3s ease;
 				font-smooth: antialiased;
 				-webkit-font-smoothing: antialiased;
@@ -110,39 +136,60 @@
 		}
 
 		.types_con:hover .types_item {
-			background: rgba(255, 255, 255, 0.4);
-			backdrop-filter: blur(12px);
-			-webkit-backdrop-filter: blur(12px);
-			border: 1px solid transparent;
+			background: rgba(255, 255, 255, 0.7);
+			backdrop-filter: blur(20px);
+			-webkit-backdrop-filter: blur(20px);
+			border: 1px solid rgba(24, 144, 255, 0.15);
 			box-shadow:
-				0 2px 8px rgba(0, 0, 0, 0.05),
-				inset 0 1px 0 rgba(255, 255, 255, 0.9);
+				0 4px 16px rgba(0, 0, 0, 0.08),
+				inset 0 1px 0 rgba(255, 255, 255, 0.95);
 		}
 
 		.active {
 			color: #0066cc;
-			background: rgba(24, 144, 255, 0.15);
-			border: 1px solid rgba(24, 144, 255, 0.3);
-			font-weight: 800;
+			background: linear-gradient(
+				135deg,
+				rgba(24, 144, 255, 0.2),
+				rgba(9, 109, 217, 0.15)
+			);
+			backdrop-filter: blur(24px);
+			-webkit-backdrop-filter: blur(24px);
+			// border: 2px solid rgba(24, 144, 255, 0.4);
+			font-weight: 700;
 			transform: translateY(-3px) scale(1.02);
 			box-shadow:
 				// 顶部高光
-				inset 0 2px 0 rgba(255, 255, 255, 1),
+				inset 0 2px 0 rgba(255, 255, 255, 0.8),
 				// 底部内阴影
-				inset 0 -2px 0 rgba(24, 144, 255, 0.18),
+				inset 0 -1px 0 rgba(24, 144, 255, 0.2),
 				// 左侧内阴影
-				inset 2px 0 0 rgba(255, 255, 255, 1),
+				inset 1px 0 0 rgba(255, 255, 255, 0.6),
 				// 右侧内阴影
-				inset -2px 0 0 rgba(24, 144, 255, 0.12),
+				inset -1px 0 0 rgba(24, 144, 255, 0.15),
 				// 外部阴影
-				0 10px 24px rgba(24, 144, 255, 0.18);
+				0 12px 28px rgba(24, 144, 255, 0.2);
 			font-smooth: antialiased;
 			-webkit-font-smoothing: antialiased;
 			-moz-osx-font-smoothing: grayscale;
 
 			.types_item_name {
 				color: #0066cc;
-				font-weight: 800;
+				font-weight: 700;
+			}
+
+			// 确保图标颜色与文字颜色一致
+			.anticon svg {
+				fill: #0066cc !important;
+			}
+
+			// 备用选择器，确保覆盖所有情况
+			> span svg {
+				fill: #0066cc !important;
+			}
+
+			// 直接选择svg
+			svg {
+				fill: #0066cc !important;
 			}
 		}
 	}

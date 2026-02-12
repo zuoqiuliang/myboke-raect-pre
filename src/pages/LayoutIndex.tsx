@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Outlet } from "umi";
 import Header from "../components/header";
+import CanvasRain from "../components/CanvasRain";
 import "@/less/reset.less";
 import layoutStyle from "./LayoutIndex/less/layout.less";
 import Login from "@/components/Login/index";
@@ -23,6 +24,7 @@ export default function LayoutIndex() {
 
 	return (
 		<div className={layoutStyle.layout_container}>
+			{/* <CanvasRain /> */}
 			<Header />
 			<div className={layoutStyle.child_routes}>
 				<Outlet />
