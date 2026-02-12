@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import articleStyle from "../article.less";
 import dayjs from "dayjs";
 import { StarOutlined, StarFilled, LikeOutlined, LikeFilled } from "@ant-design/icons";
@@ -54,6 +54,20 @@ export default function ArticleContent({
 			payload: true
 		});
 	};
+
+	// 复制成功提示状态
+	const [copySuccess, setCopySuccess] = useState(false);
+
+	// 复制成功后自动隐藏提示
+	useEffect(() => {
+		if (copySuccess) {
+			const timer = setTimeout(() => {
+				setCopySuccess(false);
+			}, 2000);
+			return () => clearTimeout(timer);
+		}
+	}, [copySuccess]);
+
 	// 调试：检查props是否正确接收
 	React.useEffect(() => {
 		console.log("ArticleContent props:", {
@@ -214,11 +228,21 @@ export default function ArticleContent({
 								toLogin();
 								return;
 							}
-							// 这里可以添加分享相关逻辑
-							console.log("Share button clicked");
+							// 复制页面路径到剪贴板
+							const currentUrl = window.location.href;
+							navigator.clipboard
+								.writeText(currentUrl)
+								.then(() => {
+									console.log("Page URL copied to clipboard");
+									setCopySuccess(true);
+								})
+								.catch((err) => {
+									console.error("Failed to copy: ", err);
+								});
 						}}>
 						<div className={articleStyle.action_icon}>🔗</div>
 						<span className={articleStyle.action_text}>分享</span>
+						{copySuccess && <span className={articleStyle.copy_success}>复制成功</span>}
 					</div>
 				</div>
 			</div>

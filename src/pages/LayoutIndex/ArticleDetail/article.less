@@ -158,6 +158,17 @@
 			&.action_item_active .action_count {
 				color: #1890ff;
 			}
+
+			.copy_success {
+				font-size: 12px;
+				color: #52c41a;
+				font-weight: 500;
+				background: rgba(82, 196, 26, 0.1);
+				padding: 2px 8px;
+				border-radius: 12px;
+				border: 1px solid rgba(82, 196, 26, 0.3);
+				animation: copySuccessFadeIn 0.3s ease-out;
+			}
 		}
 	}
 
@@ -170,6 +181,22 @@
 			transform: scale(1.2);
 		}
 		100% {
+			transform: scale(1);
+		}
+	}
+
+	// 复制成功提示动画
+	@keyframes copySuccessFadeIn {
+		0% {
+			opacity: 0;
+			transform: scale(0.8);
+		}
+		50% {
+			opacity: 1;
+			transform: scale(1.05);
+		}
+		100% {
+			opacity: 1;
 			transform: scale(1);
 		}
 	}
