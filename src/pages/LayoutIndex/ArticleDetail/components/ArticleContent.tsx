@@ -224,11 +224,7 @@ export default function ArticleContent({
 					<div
 						className={articleStyle.action_item}
 						onClick={() => {
-							if (!isLoggedIn) {
-								toLogin();
-								return;
-							}
-							// 复制页面路径到剪贴板
+							// 直接复制页面路径到剪贴板，不需要登录
 							const currentUrl = window.location.href;
 							navigator.clipboard
 								.writeText(currentUrl)
