@@ -28,10 +28,10 @@ const WelcomeCard: React.FC<WelcomeCardProps> = () => {
 
 	return (
 		<div className={indexStyle.welcome_card}>
-			<div className={indexStyle.welcome_title}>欢迎访问</div>
-			<div className={indexStyle.welcome_subtitle}>探索技术的无限可能</div>
+			<div className={indexStyle.welcome_title}>{timeOfDay}好！</div>
+			<div className={indexStyle.welcome_subtitle}>写下你的 idea，我来倾听你的感想</div>
 			<div className={indexStyle.welcome_date}>{currentDate}</div>
-			<div className={indexStyle.welcome_time}>{timeOfDay}好！</div>
+			<div className={indexStyle.welcome_time}>开始你的创作之旅吧</div>
 		</div>
 	);
 };
