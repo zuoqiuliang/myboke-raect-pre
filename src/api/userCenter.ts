@@ -59,3 +59,17 @@ export const getMessages = (data: any) => {
 		params: data
 	});
 };
+
+// 关注用户
+export const followUser = (userId: string) => {
+	return request("/api/userFollow/follow/" + userId, {
+		method: "POST"
+	});
+};
+
+// 取消关注
+export const unfollowUser = (userId: string) => {
+	return request(`/api/userFollow/unfollow/${userId}`, {
+		method: "POST"
+	});
+};

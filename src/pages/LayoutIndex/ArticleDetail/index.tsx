@@ -6,7 +6,9 @@ import {
 	collectArticle,
 	uncollectArticle,
 	likeArticle,
-	unlikeArticle
+	unlikeArticle,
+	followUser,
+	unfollowUser
 } from "@/api/userCenter";
 import ArticleContent from "./components/ArticleContent";
 import AuthorInfo from "./components/AuthorInfo";
@@ -33,6 +35,8 @@ export default function index() {
 	const [liking, setLiking] = useState(false);
 	const [likeCount, setLikeCount] = useState<number>(0);
 	const [commentCount, setCommentCount] = useState<number>(0);
+	const [isFollowing, setIsFollowing] = useState(false);
+	const [following, setFollowing] = useState(false);
 
 	// 滚动到顶部函数
 	const scrollToTop = () => {
@@ -154,6 +158,34 @@ export default function index() {
 		}
 	};
 
+	// 切换关注状态
+	const handleFollow = async () => {
+		const authorId = article.userInfo?.userId;
+		if (!authorId) return;
+
+		setFollowing(true);
+		try {
+			if (isFollowing) {
+				// 取消关注
+				await unfollowUser(authorId);
+				setIsFollowing(false);
+				message.success("取消关注成功!");
+			} else {
+				// 关注用户
+				const res = await followUser(authorId);
+				if (res) {
+					setIsFollowing(true);
+					message.success("关注成功!");
+				}
+			}
+		} catch (error) {
+			console.error("操作失败:", error);
+			message.error(isFollowing ? "取消关注失败" : "关注失败");
+		} finally {
+			setFollowing(false);
+		}
+	};
+
 	// 获取文章详情
 	useEffect(() => {
 		// 获取动态路由参数id
@@ -171,6 +203,8 @@ export default function index() {
 				setLikeCount(res.likeCount || 0);
 				// 更新评论数
 				setCommentCount(res.commentCount || 0);
+				// 更新关注状态
+				setIsFollowing(res.isFollowingAuthor || false);
 			});
 		}
 	}, [params.id]);
@@ -184,10 +218,13 @@ export default function index() {
 						likeCount={likeCount}
 						isCollected={isCollected}
 						isLiked={isLiked}
+						isFollowing={isFollowing}
 						onCollect={handleCollect}
 						onLike={handleLike}
+						onFollow={handleFollow}
 						collecting={collecting}
 						liking={liking}
+						following={following}
 					/>
 					<CommentSection
 						articleId={params.id as string}

@@ -10,10 +10,13 @@ interface ArticleContentProps {
 	likeCount?: number;
 	isCollected?: boolean;
 	isLiked?: boolean;
+	isFollowing?: boolean;
 	onCollect?: () => void;
 	onLike?: () => void;
+	onFollow?: () => void;
 	collecting?: boolean;
 	liking?: boolean;
+	following?: boolean;
 }
 
 // 递归获取所有TOC项的slug
@@ -34,10 +37,13 @@ export default function ArticleContent({
 	likeCount,
 	isCollected = false,
 	isLiked = false,
+	isFollowing = false,
 	onCollect,
 	onLike,
+	onFollow,
 	collecting = false,
-	liking = false
+	liking = false,
+	following = false
 }: ArticleContentProps) {
 	const dispatch = useDispatch();
 	const userInfo = useSelector((state: any) => {
@@ -141,7 +147,19 @@ export default function ArticleContent({
 						· {article.scanNumber || 0} 阅读
 					</div>
 				</div>
-				<div className={articleStyle.follow_btn}>关注</div>
+				<div
+					className={`${articleStyle.follow_btn} ${isFollowing ? articleStyle.follow_btn_active : ""} ${following ? articleStyle.follow_btn_disabled : ""}`}
+					onClick={() => {
+						if (!isLoggedIn) {
+							toLogin();
+							return;
+						}
+						if (!following && onFollow) {
+							onFollow();
+						}
+					}}>
+					{isFollowing ? "已关注" : "关注"}
+				</div>
 			</div>
 			<div
 				ref={contentRef}
