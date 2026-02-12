@@ -69,6 +69,7 @@ export default function ArticleItem({ article }: { article: any }) {
 							<div className={articleStyle.username}>
 								{article.userInfo?.userName || "未知用户"}
 							</div>
+							<div className={articleStyle.separator}></div>
 							<div className={articleStyle.category}>{getCategoryName()}</div>
 						</div>
 						<div className={articleStyle.right_info}>
