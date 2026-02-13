@@ -12,8 +12,17 @@
 @transition: all 0.3s ease;
 
 // 全局过渡效果
-* {
+a,
+button,
+input,
+textarea {
 	transition: @transition;
+}
+
+// 确保 Select 组件的下拉框不受过渡效果影响
+.ant-select-dropdown,
+.ant-select-dropdown * {
+	transition: none !important;
 }
 
 html {
