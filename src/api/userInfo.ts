@@ -13,3 +13,10 @@ export const getUserInfoApi = () => {
 		method: "GET"
 	});
 };
+
+// 查询指定用户信息
+export const getUserInfoById = (userId: string) => {
+	return request(`/api/userInfo/${userId}`, {
+		method: "GET"
+	});
+};

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "umi";
 import articleStyle from "../article.less";
 import dayjs from "dayjs";
 import { StarOutlined, StarFilled, LikeOutlined, LikeFilled } from "@ant-design/icons";
@@ -46,12 +47,34 @@ export default function ArticleContent({
 	following = false
 }: ArticleContentProps) {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
+	// 处理头像点击
+	const handleAvatarClick = () => {
+		console.log("Article data:", article);
+		// 尝试获取 userId，兼容不同的字段名
+		const userId = article.userInfo?.userId;
+		console.log("User ID:", userId);
+		if (userId) {
+			navigate(`/userProfile?userId=${userId}`);
+		}
+	};
 	const userInfo = useSelector((state: any) => {
 		return state.userModel.userInfo;
 	});
 
 	// 检查用户是否登录
 	const isLoggedIn = !!userInfo?.userName;
+
+	// 检查文章作者是否与当前登录用户是同一人
+	const isCurrentUserAuthor = () => {
+		// 获取当前登录用户的 ID
+		const currentUserId = userInfo?.userId;
+		// 获取文章作者的 ID
+		const authorId = article.userInfo?.userId;
+		// 比较两者是否相同
+		return currentUserId && authorId && currentUserId === authorId;
+	};
 
 	// 显示登录弹窗
 	const toLogin = () => {
@@ -134,9 +157,14 @@ export default function ArticleContent({
 						"https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png"
 					}
 					alt={article.userInfo?.userName || "作者"}
+					onClick={handleAvatarClick}
+					style={{ cursor: "pointer" }}
 				/>
 				<div className={articleStyle.author_meta}>
-					<div className={articleStyle.author_name}>
+					<div
+						className={articleStyle.author_name}
+						onClick={handleAvatarClick}
+						style={{ cursor: "pointer" }}>
 						{article.userInfo?.userName || "匿名作者"}
 					</div>
 					<div className={articleStyle.publish_info}>
@@ -147,19 +175,22 @@ export default function ArticleContent({
 						· {article.scanNumber || 0} 阅读
 					</div>
 				</div>
-				<div
-					className={`${articleStyle.follow_btn} ${isFollowing ? articleStyle.follow_btn_active : ""} ${following ? articleStyle.follow_btn_disabled : ""}`}
-					onClick={() => {
-						if (!isLoggedIn) {
-							toLogin();
-							return;
-						}
-						if (!following && onFollow) {
-							onFollow();
-						}
-					}}>
-					{isFollowing ? "已关注" : "关注"}
-				</div>
+				{/* 只有当文章作者与当前登录用户不是同一人时才显示关注按钮 */}
+				{!isCurrentUserAuthor() && (
+					<div
+						className={`${articleStyle.follow_btn} ${isFollowing ? articleStyle.follow_btn_active : ""} ${following ? articleStyle.follow_btn_disabled : ""}`}
+						onClick={() => {
+							if (!isLoggedIn) {
+								toLogin();
+								return;
+							}
+							if (!following && onFollow) {
+								onFollow();
+							}
+						}}>
+						{isFollowing ? "已关注" : "关注"}
+					</div>
+				)}
 			</div>
 			<div
 				ref={contentRef}

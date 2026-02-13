@@ -3,25 +3,23 @@ import { getArticleList } from "@/api/article";
 import ArticleItem from "./ArticleItem";
 import indexStyle from "../index.less";
 
-export default function ArticleList({ currentType }: { currentType: string }) {
+export default function ArticleList({ currentType, userId }: { currentType?: string; userId?: string }) {
 	const [page, setPage] = useState(1);
 	const [limit, setLimit] = useState(10);
 	const [total, setTotal] = useState(0);
 	const [articleList, setArticleList] = useState<any>([]);
 	useEffect(() => {
-		console.log(currentType);
 		getArticleList({
 			page: page,
 			limit: limit,
-			categoryId: currentType
+			categoryId: currentType,
+			userId: userId
 		}).then((res: any) => {
-			console.log(res);
 			if (res.rows) {
 				setArticleList(res.rows);
-				// setTotal(res[0].total);
 			}
 		});
-	}, [currentType, page]);
+	}, [currentType, page, userId]);
 	return (
 		<div className={indexStyle.article_list}>
 			{articleList.map((item: any) => {

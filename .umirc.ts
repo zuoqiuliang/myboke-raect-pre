@@ -15,7 +15,8 @@ export default defineConfig({
 					path: "/personalCenter",
 					component: "@/pages/LayoutIndex/PersonalCenter/index"
 				},
-				{ path: "/messages", component: "@/pages/LayoutIndex/Messages/index" }
+				{ path: "/messages", component: "@/pages/LayoutIndex/Messages/index" },
+				{ path: "/userProfile", component: "@/pages/LayoutIndex/UserProfile/index" }
 			]
 		}
 	],
