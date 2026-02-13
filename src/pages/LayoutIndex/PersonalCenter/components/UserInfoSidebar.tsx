@@ -32,6 +32,12 @@ const UserInfoSidebar = forwardRef<UserInfoSidebarMethods, any>((props, ref) => 
 		avatar: userInfo.avatar || ""
 	});
 
+	const [userStats, setUserStats] = useState({
+		articleCount: 0,
+		followingCount: 0,
+		followerCount: 0
+	});
+
 	const [fileList, setFileList] = useState<UploadFile[]>([]);
 	const [previewOpen, setPreviewOpen] = useState(false);
 	const [previewImage, setPreviewImage] = useState("");
@@ -152,6 +158,12 @@ const UserInfoSidebar = forwardRef<UserInfoSidebarMethods, any>((props, ref) => 
 						careerDirection: res.careerDirection || "",
 						avatar: res.avatar || ""
 					});
+					// 更新用户统计数据
+					setUserStats({
+						articleCount: res.articleCount || 0,
+						followingCount: res.followingCount || 0,
+						followerCount: res.followerCount || 0
+					});
 					// 更新fileList状态
 					if (res.avatar) {
 						setFileList([
@@ -203,15 +215,17 @@ const UserInfoSidebar = forwardRef<UserInfoSidebarMethods, any>((props, ref) => 
 
 			<div className={userInfoSidebarStyle.user_stats}>
 				<div className={userInfoSidebarStyle.stat_item}>
-					<div className={userInfoSidebarStyle.stat_value}>12</div>
+					<div className={userInfoSidebarStyle.stat_value}>{userStats.articleCount}</div>
 					<div className={userInfoSidebarStyle.stat_label}>文章</div>
 				</div>
 				<div className={userInfoSidebarStyle.stat_item}>
-					<div className={userInfoSidebarStyle.stat_value}>89</div>
+					<div className={userInfoSidebarStyle.stat_value}>
+						{userStats.followingCount}
+					</div>
 					<div className={userInfoSidebarStyle.stat_label}>关注</div>
 				</div>
 				<div className={userInfoSidebarStyle.stat_item}>
-					<div className={userInfoSidebarStyle.stat_value}>24</div>
+					<div className={userInfoSidebarStyle.stat_value}>{userStats.followerCount}</div>
 					<div className={userInfoSidebarStyle.stat_label}>粉丝</div>
 				</div>
 			</div>
