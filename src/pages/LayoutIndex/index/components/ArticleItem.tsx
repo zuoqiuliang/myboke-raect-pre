@@ -111,17 +111,19 @@ export default function ArticleItem({ article }: { article: any }) {
 						</div>
 					</div>
 				</div>
-				<div className={articleStyle.right_con}>
-					<div className={articleStyle.article_thumb}>
-						<img
-							src={
-								article.thumb ||
-								"https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=technology%20blog%20placeholder%20image&image_size=square"
-							}
-							alt={article.title}
-						/>
+				{article.thumb ? (
+					<div className={articleStyle.right_con}>
+						<div className={articleStyle.article_thumb}>
+							<img
+								src={
+									article.thumb ||
+									"https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=technology%20blog%20placeholder%20image&image_size=square"
+								}
+								alt={article.title}
+							/>
+						</div>
 					</div>
-				</div>
+				) : null}
 			</div>
 		</Link>
 	);

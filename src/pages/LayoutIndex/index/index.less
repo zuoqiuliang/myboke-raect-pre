@@ -184,6 +184,39 @@
 			overflow: hidden;
 			border-radius: 20px;
 			transform-style: preserve-3d;
+
+			// 加载中提示
+			.loading_container {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				padding: 40px 0;
+				background: rgba(255, 255, 255, 0.6);
+				backdrop-filter: blur(20px);
+				-webkit-backdrop-filter: blur(20px);
+				border-top: 1px solid rgba(24, 144, 255, 0.2);
+
+				.ant-spin-text {
+					color: #1890ff;
+					font-size: 14px;
+					font-weight: 600;
+				}
+			}
+
+			// 无更多数据提示
+			.no_more_container {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				padding: 40px 0;
+				background: rgba(255, 255, 255, 0.6);
+				backdrop-filter: blur(20px);
+				-webkit-backdrop-filter: blur(20px);
+				border-top: 1px solid rgba(24, 144, 255, 0.2);
+				color: #94a3b8;
+				font-size: 14px;
+				font-weight: 600;
+			}
 		}
 	}
 

@@ -56,7 +56,14 @@ export default function ArticleContent({
 		const userId = article.userInfo?.userId;
 		console.log("User ID:", userId);
 		if (userId) {
-			navigate(`/userProfile?userId=${userId}`);
+			// 检查是否登录
+			if (isLoggedIn) {
+				// 已登录，跳转到用户 profile 页面
+				navigate(`/userProfile?userId=${userId}`);
+			} else {
+				// 未登录，显示登录弹窗
+				toLogin();
+			}
 		}
 	};
 	const userInfo = useSelector((state: any) => {

@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "umi";
 import articleStyle from "../article.less";
+import { useDispatch, useSelector } from "umi";
 
 interface AuthorInfoProps {
 	article: any;
@@ -8,6 +9,23 @@ interface AuthorInfoProps {
 
 export default function AuthorInfo({ article }: AuthorInfoProps) {
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
+
+	// 获取用户信息
+	const userInfo = useSelector((state: any) => {
+		return state.userModel.userInfo;
+	});
+
+	// 检查用户是否登录
+	const isLoggedIn = !!userInfo?.userName;
+
+	// 显示登录弹窗
+	const toLogin = () => {
+		dispatch({
+			type: "loginModel/setIsShowLoginModal",
+			payload: true
+		});
+	};
 
 	// 处理头像点击
 	const handleAvatarClick = () => {
@@ -16,7 +34,14 @@ export default function AuthorInfo({ article }: AuthorInfoProps) {
 		const userId = article.userInfo?.userId;
 		console.log("User ID:", userId);
 		if (userId) {
-			navigate(`/userProfile?userId=${userId}`);
+			// 检查是否登录
+			if (isLoggedIn) {
+				// 已登录，跳转到用户 profile 页面
+				navigate(`/userProfile?userId=${userId}`);
+			} else {
+				// 未登录，显示登录弹窗
+				toLogin();
+			}
 		}
 	};
 
