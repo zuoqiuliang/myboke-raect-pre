@@ -10,6 +10,8 @@
 	// 左侧分类导航
 	.types_con {
 		width: 180px;
+		max-height: calc(100vh - 48px); // 限制高度，留出顶部和底部间距
+		overflow-y: auto; // 添加垂直滚动条
 		background: rgba(255, 255, 255, 0.6);
 		backdrop-filter: blur(20px);
 		-webkit-backdrop-filter: blur(20px);
@@ -27,6 +29,31 @@
 		position: sticky;
 		top: 24px;
 		align-self: flex-start;
+
+		// 美化滚动条
+		&::-webkit-scrollbar {
+			width: 6px;
+			border-radius: 3px;
+		}
+
+		&::-webkit-scrollbar-track {
+			background: rgba(24, 144, 255, 0.1);
+			border-radius: 3px;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background: rgba(24, 144, 255, 0.3);
+			border-radius: 3px;
+			transition: background 0.3s ease;
+		}
+
+		&::-webkit-scrollbar-thumb:hover {
+			background: rgba(24, 144, 255, 0.5);
+		}
+
+		// 兼容 Firefox
+		scrollbar-width: thin;
+		scrollbar-color: rgba(24, 144, 255, 0.3) rgba(24, 144, 255, 0.1);
 		// 移除过渡效果
 		// transition:
 		// 		transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
