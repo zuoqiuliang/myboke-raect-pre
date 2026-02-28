@@ -29,6 +29,7 @@ export default function LayoutIndex() {
 			<div className={layoutStyle.child_routes}>
 				<Outlet />
 			</div>
+
 			<Login
 				isModalOpen={isShowLoginModal}
 				confirm={confirmLogin}

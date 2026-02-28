@@ -505,6 +505,45 @@
 		}
 	}
 
+	// 备案信息
+	.beian_info {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		font-size: 12px;
+		color: #64748b;
+		margin-top: 20px;
+		padding: 12px;
+		background: rgba(255, 255, 255, 0.6);
+		backdrop-filter: blur(20px);
+		-webkit-backdrop-filter: blur(20px);
+		border: 1px solid rgba(24, 144, 255, 0.25);
+		border-radius: 16px;
+		box-shadow:
+			// 底部阴影（增强厚度感）
+			0 4px 8px rgba(24, 144, 255, 0.1),
+			// 顶部高光（边框感）
+			inset 0 1px 0 rgba(255, 255, 255, 0.98),
+			// 底部内阴影（增强深度感）
+			inset 0 -1px 0 rgba(24, 144, 255, 0.12);
+
+		.beian_link {
+			color: #64748b;
+			text-decoration: none;
+			transition: color 0.3s ease;
+
+			&:hover {
+				color: #1890ff;
+			}
+		}
+
+		.beian_icon {
+			width: 14px;
+			height: 14px;
+			object-fit: contain;
+		}
+	}
+
 	// 响应式设计
 	@media (max-width: 1280px) {
 		width: 95%;
