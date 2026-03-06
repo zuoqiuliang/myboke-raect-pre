@@ -505,42 +505,123 @@
 		}
 	}
 
-	// 备案信息
-	.beian_info {
-		display: flex;
-		align-items: center;
-		gap: 8px;
-		font-size: 12px;
-		color: #64748b;
-		margin-top: 20px;
-		padding: 12px;
+	// 联系博主
+	.contact_blogger {
 		background: rgba(255, 255, 255, 0.6);
 		backdrop-filter: blur(20px);
 		-webkit-backdrop-filter: blur(20px);
 		border: 1px solid rgba(24, 144, 255, 0.25);
-		border-radius: 16px;
+		border-radius: 20px;
 		box-shadow:
 			// 底部阴影（增强厚度感）
-			0 4px 8px rgba(24, 144, 255, 0.1),
+			0 8px 16px rgba(24, 144, 255, 0.15),
 			// 顶部高光（边框感）
 			inset 0 1px 0 rgba(255, 255, 255, 0.98),
 			// 底部内阴影（增强深度感）
 			inset 0 -1px 0 rgba(24, 144, 255, 0.12);
+		padding: 24px;
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+		&:hover {
+			transform: translateY(-3px);
+			box-shadow:
+				0 12px 24px rgba(24, 144, 255, 0.2),
+				inset 0 1px 0 rgba(255, 255, 255, 0.98),
+				inset 0 -1px 0 rgba(24, 144, 255, 0.12);
+		}
+
+		.section_title {
+			font-size: 18px;
+			font-weight: 700;
+			margin-bottom: 20px;
+			color: #1890ff;
+			letter-spacing: 0.5px;
+			font-smooth: antialiased;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+		}
+
+		.qr_code_container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 12px;
+		}
+
+		.qr_code {
+			width: 160px;
+			height: 160px;
+			object-fit: contain;
+			border-radius: 12px;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+		}
+
+		.qr_code_text {
+			font-size: 14px;
+			font-weight: 600;
+			color: #1d2129;
+			text-align: center;
+			font-smooth: antialiased;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+		}
+	}
+
+	// 备案信息
+	.beian_info {
+		display: flex;
+		align-items: flex-start;
+		font-size: 12px;
+		color: #64748b;
+		margin-top: 20px;
+		padding: 20px;
+		background: rgba(255, 255, 255, 0.9);
+		backdrop-filter: blur(24px);
+		-webkit-backdrop-filter: blur(24px);
+		border: 1px solid rgba(24, 144, 255, 0.3);
+		border-radius: 20px;
+		box-shadow:
+			0 8px 16px rgba(24, 144, 255, 0.15),
+			inset 0 1px 0 rgba(255, 255, 255, 0.98),
+			inset 0 -1px 0 rgba(24, 144, 255, 0.12);
+
+		.beian_text {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 8px;
+		}
+
+		.beian_item {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
+
+		.beian_spacer {
+			width: 16px;
+			height: 16px;
+			display: inline-block;
+		}
+
+		.beian_icon {
+			width: 16px;
+			height: 16px;
+			object-fit: contain;
+		}
 
 		.beian_link {
 			color: #64748b;
 			text-decoration: none;
-			transition: color 0.3s ease;
 
 			&:hover {
 				color: #1890ff;
 			}
 		}
 
-		.beian_icon {
-			width: 14px;
-			height: 14px;
-			object-fit: contain;
+		.beian_separator {
+			color: #64748b;
+			margin: 0 4px;
 		}
 	}
 

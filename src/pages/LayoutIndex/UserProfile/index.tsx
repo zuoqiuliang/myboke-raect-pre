@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSearchParams, useNavigate } from "umi";
+import { useSearchParams, useNavigate, useSelector } from "umi";
 import userProfileStyle from "./index.less";
 import {
 	UserOutlined,
@@ -30,12 +30,20 @@ export default function UserProfile() {
 	const [loading, setLoading] = useState(true);
 
 	// 获取用户信息
+	const loginUserInfo = useSelector((state: any) => {
+		return state.userModel.userInfo;
+	});
+
+	// 检查用户是否登录
+	const isLoggedIn = !!loginUserInfo?.userName;
+
+	// 获取用户信息
 	useEffect(() => {
 		const fetchUserInfo = async () => {
 			try {
 				setLoading(true);
 				// 获取当前用户信息
-				const currentUserRes = await getUserInfoApi();
+				const currentUserRes = await getUserInfoById(userId);
 				if (currentUserRes) {
 					setCurrentUser(currentUserRes);
 				}
@@ -45,7 +53,7 @@ export default function UserProfile() {
 				if (userId) {
 					res = await getUserInfoById(userId);
 				} else {
-					res = await getUserInfoApi();
+					res = await getUserInfoById(userId);
 				}
 				if (res) {
 					setUserInfo(res);
@@ -64,6 +72,13 @@ export default function UserProfile() {
 	useEffect(() => {
 		const fetchCollections = async () => {
 			if (activeTab === "collections") {
+				// 检查用户是否登录
+				if (!isLoggedIn) {
+					setCollections([]);
+					setCollectionsLoading(false);
+					return;
+				}
+
 				try {
 					setCollectionsLoading(true);
 					const res = await getMyCollections({ page: 1, pageSize: 10 });
@@ -79,7 +94,7 @@ export default function UserProfile() {
 		};
 
 		fetchCollections();
-	}, [activeTab]);
+	}, [activeTab, isLoggedIn]);
 
 	// 处理返回
 	const handleBack = () => {
@@ -221,7 +236,9 @@ export default function UserProfile() {
 					</div>
 					<div
 						className={`${userProfileStyle.nav_item} ${activeTab === "collections" ? userProfileStyle.nav_item_active : ""}`}
-						onClick={() => setActiveTab("collections")}>
+						onClick={() => {
+							setActiveTab("collections");
+						}}>
 						收藏
 					</div>
 				</div>
@@ -233,7 +250,17 @@ export default function UserProfile() {
 					{activeTab === "posts" ? (
 						<ArticleList userId={userId} />
 					) : activeTab === "collections" ? (
-						collectionsLoading ? (
+						!isLoggedIn ? (
+							<div className={userProfileStyle.login_prompt}>
+								<div className={userProfileStyle.login_prompt_icon}>🔒</div>
+								<h3 className={userProfileStyle.login_prompt_title}>
+									请登录后查看用户喜欢文章
+								</h3>
+								<p className={userProfileStyle.login_prompt_text}>
+									登录后即可查看和管理您的收藏内容
+								</p>
+							</div>
+						) : collectionsLoading ? (
 							<div className={userProfileStyle.loading}>加载收藏中...</div>
 						) : collections.length > 0 ? (
 							<div className={userProfileStyle.collections_list}>
