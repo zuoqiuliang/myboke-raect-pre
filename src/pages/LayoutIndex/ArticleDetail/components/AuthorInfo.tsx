@@ -3,12 +3,22 @@ import { useNavigate } from "umi";
 import articleStyle from "../article.less";
 import { useDispatch, useSelector } from "umi";
 import { getUserInfoById } from "@/api/userInfo";
+import { followUser, unfollowUser } from "@/api/userCenter";
+import { message } from "antd";
 
 interface AuthorInfoProps {
 	article: any;
+	isFollowing?: boolean;
+	following?: boolean;
+	onFollow?: () => void;
 }
 
-export default function AuthorInfo({ article }: AuthorInfoProps) {
+export default function AuthorInfo({
+	article,
+	isFollowing,
+	following,
+	onFollow
+}: AuthorInfoProps) {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const [authorInfo, setAuthorInfo] = useState<any>(null);
@@ -43,6 +53,20 @@ export default function AuthorInfo({ article }: AuthorInfoProps) {
 			// 	toLogin();
 			// }
 			navigate(`/userProfile?userId=${userId}`);
+		}
+	};
+
+	// 切换关注状态
+	const handleFollow = () => {
+		// 如果未登录，显示登录弹窗
+		if (!isLoggedIn) {
+			toLogin();
+			return;
+		}
+
+		// 调用父组件传递的onFollow函数
+		if (onFollow) {
+			onFollow();
 		}
 	};
 
@@ -117,11 +141,32 @@ export default function AuthorInfo({ article }: AuthorInfoProps) {
 					onClick={handleAvatarClick}
 					style={{ cursor: "pointer" }}>
 					<span className={articleStyle.stat_value}>
+						{displayInfo?.totalArticlesScanCount || 0}
+					</span>
+					<span className={articleStyle.stat_label}>阅读</span>
+				</div>
+				<div className={articleStyle.stat_divider}></div>
+				<div
+					className={articleStyle.stat_item}
+					onClick={handleAvatarClick}
+					style={{ cursor: "pointer" }}>
+					<span className={articleStyle.stat_value}>
 						{displayInfo?.likeCount || displayInfo?.totalArticlesLikeCount || 0}
 					</span>
 					<span className={articleStyle.stat_label}>获赞</span>
 				</div>
 			</div>
+			{/* 当登录用户与作者不是同一人时显示关注按钮 */}
+			{isLoggedIn && userInfo?.userId !== article.userInfo?.userId && (
+				<div className={articleStyle.author_actions}>
+					<button
+						className={`${articleStyle.follow_button} ${isFollowing ? articleStyle.following_button : ""}`}
+						onClick={handleFollow}
+						disabled={following}>
+						{isFollowing ? "已关注" : "关注"}
+					</button>
+				</div>
+			)}
 		</div>
 	);
 }

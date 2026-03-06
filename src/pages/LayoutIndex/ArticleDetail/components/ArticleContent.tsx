@@ -182,22 +182,6 @@ export default function ArticleContent({
 						· {article.scanNumber || 0} 阅读
 					</div>
 				</div>
-				{/* 只有当文章作者与当前登录用户不是同一人时才显示关注按钮 */}
-				{!isCurrentUserAuthor() && (
-					<div
-						className={`${articleStyle.follow_btn} ${isFollowing ? articleStyle.follow_btn_active : ""} ${following ? articleStyle.follow_btn_disabled : ""}`}
-						onClick={() => {
-							if (!isLoggedIn) {
-								toLogin();
-								return;
-							}
-							if (!following && onFollow) {
-								onFollow();
-							}
-						}}>
-						{isFollowing ? "已关注" : "关注"}
-					</div>
-				)}
 			</div>
 			<div
 				ref={contentRef}

@@ -232,7 +232,12 @@ export default function index() {
 					/>
 				</div>
 				<div className={articleStyle.article_right}>
-					<AuthorInfo article={article} />
+					<AuthorInfo
+						article={article}
+						isFollowing={isFollowing}
+						following={following}
+						onFollow={handleFollow}
+					/>
 					<ArticleTOC article={article} />
 				</div>
 			</div>
