@@ -51,6 +51,15 @@ export default defineConfig({
 				filename: "fonts/[name].[hash:8][ext]"
 			});
 
+		// 为图片文件添加处理规则
+		config.module
+			.rule("images")
+			.test(/\.(png|jpe?g|gif|webp|svg)$/)
+			.type("asset/resource")
+			.generator({
+				filename: "assets/[name].[hash:8][ext]"
+			});
+
 		// 确保 css-loader 正确处理字体文件路径
 		config.module
 			.rule("css")
