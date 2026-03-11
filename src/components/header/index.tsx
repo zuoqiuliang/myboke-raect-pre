@@ -141,13 +141,16 @@ function index() {
 							<span className={headerStyle.logo_text}>超级码力</span>
 						</div>
 						<div className={headerStyle.tab_con}>
-							<div className={headerStyle.tab_item} onClick={() => history.push("/")}>
-								首页
+								<div className={headerStyle.tab_item} onClick={() => history.push("/")}>
+									首页
+								</div>
+								<div className={headerStyle.tab_item} onClick={toMessages}>
+									社区评论
+								</div>
+								<div className={headerStyle.tab_item} onClick={() => history.push("/liiangcoms/")}>
+									组件库
+								</div>
 							</div>
-							<div className={headerStyle.tab_item} onClick={toMessages}>
-								社区评论
-							</div>
-						</div>
 					</div>
 					<div className={headerStyle.right_con}>
 						<div className={headerStyle.create_con}>
