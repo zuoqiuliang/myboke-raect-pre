@@ -147,7 +147,7 @@ function index() {
 								<div className={headerStyle.tab_item} onClick={toMessages}>
 									社区评论
 								</div>
-								<div className={headerStyle.tab_item} onClick={() => history.push("/liiangcoms/")}>
+								<div className={headerStyle.tab_item} onClick={() => history.push("/liangcoms/")}>
 									组件库
 								</div>
 							</div>
