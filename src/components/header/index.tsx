@@ -147,7 +147,7 @@ function index() {
 								<div className={headerStyle.tab_item} onClick={toMessages}>
 									社区评论
 								</div>
-								<div className={headerStyle.tab_item} onClick={() => history.push("/liangcoms/quick-start")}>
+								<div className={headerStyle.tab_item} onClick={() => history.push("/liangcoms/quick-start/")}>
 									组件库
 								</div>
 							</div>
