@@ -147,7 +147,7 @@ function index() {
 								<div className={headerStyle.tab_item} onClick={toMessages}>
 									社区评论
 								</div>
-								<div className={headerStyle.tab_item} onClick={() => window.location.href = "/liangcoms/quick-start/"}>
+								<div className={headerStyle.tab_item} onClick={() => window.location.href = "/liangcoms/installation/"}>
 									组件库
 								</div>
 							</div>
